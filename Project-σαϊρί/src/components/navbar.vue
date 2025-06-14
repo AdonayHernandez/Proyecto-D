@@ -1,5 +1,15 @@
-﻿<template>
-  <div class="min-h-screen relative">
+﻿<template>  <div class="min-h-screen relative">    <!-- Animación de joyas flotantes -->
+    <div class="jewels-animation fixed inset-0 pointer-events-none z-10 overflow-hidden">      <div v-for="i in 20" :key="`jewel-${i}`" 
+           :class="`jewel jewel-${i % 15 + 1}`"
+           class="absolute rounded-lg shadow-lg">
+      </div>
+      <!-- Emojis de corazones y elementos románticos -->      <div v-for="i in 15" :key="`heart-${i}`" 
+           :class="`heart heart-${i % 10 + 1}`"
+           class="absolute text-center">
+           <span class="text-2xl sm:text-3xl">{{ heartEmojis[i % heartEmojis.length] }}</span>
+      </div>
+    </div>
+
     <!-- Contenedor principal con z-index -->
     <div class="relative z-1">
       <!-- Header y contenido existente -->
@@ -168,9 +178,8 @@
                 </p>
                 
                 <!-- Botones de Acción -->
-                <div class="flex space-x-2">
-                  <a 
-                    :href="product.permalink" 
+                <div class="flex space-x-2">                  <a 
+                    :href="instagramProfileUrl" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     class="flex-1 inline-flex items-center justify-center px-4 py-2 bg-pink-50 hover:bg-pink-100 text-pink-500 font-medium rounded-lg transition-colors text-sm"
@@ -179,7 +188,7 @@
                     Ver en Instagram
                   </a>
                   <a 
-                    :href="getWhatsAppLinkForProduct(product)" 
+                    :href="whatsappUrl" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     class="flex-1 inline-flex items-center justify-center px-4 py-2 bg-green-50 hover:bg-green-100 text-green-500 font-medium rounded-lg transition-colors text-sm"
@@ -626,6 +635,9 @@ const whatsappUrl = 'https://wa.me/+50372011707'
 const instagramProfileUrl = 'https://www.instagram.com/joyeria_tu_estilo_'
 const whatsAppNumber = '+50372011707'
 
+// Emojis de corazones y elementos románticos
+const heartEmojis = ['💖', '💕', '💞', '�', '�', '✨', '�', '🌟', '♥️', '💝']
+
 // Items del menú
 const menuItems = [
   { id: 'inicio', text: 'Inicio', href: '#inicio', icon: Home },
@@ -759,15 +771,149 @@ onMounted(() => {
   startAutoplay()
   window.addEventListener('scroll', () => {
     isScrolled.value = window.scrollY > 10
+    handleScroll()
   })
+  
+  // Iniciar animación de joyas al cargar la página
+  document.addEventListener('mousemove', handleMouseMove)
 })
 
 onBeforeUnmount(() => {
   stopAutoplay()
   window.removeEventListener('scroll', () => {
     isScrolled.value = window.scrollY > 10
+    handleScroll()
   })
+  
+  // Detener animación de joyas al desmontar
+  document.removeEventListener('mousemove', handleMouseMove)
 })
+
+// Función para animar elementos al hacer scroll - evitando slider y productos
+const handleScroll = () => {
+  const scrollPosition = window.scrollY / document.body.scrollHeight
+  const jewels = document.querySelectorAll('.jewel')
+  const hearts = document.querySelectorAll('.heart')
+  
+  // Detectar si estamos en la sección de slider o productos
+  const isProductSection = scrollPosition > 0.2 && scrollPosition < 0.6
+    // Hacer aparecer joyas según el scroll - evitando slider y productos
+  jewels.forEach((jewel, index) => {
+    // Calcular nueva opacidad basada en la posición de scroll
+    let finalOpacity = 0.25
+    
+    // Si estamos en la sección de productos, reducir opacidad
+    if (isProductSection) {
+      finalOpacity = 0.15
+    }
+    
+    // Mantener joyas más visibles en áreas de footer y header
+    if (scrollPosition < 0.15 || scrollPosition > 0.85) {
+      finalOpacity = 0.3
+    }
+    
+    jewel.style.opacity = finalOpacity.toString()
+    
+    // Ajustar posición basado en scroll - manteniéndose en los bordes
+    const yOffset = index % 2 === 0 ? scrollPosition * 80 : -scrollPosition * 80
+    const currentTransform = jewel.style.transform || ''
+    if (currentTransform.includes('translate')) {
+      jewel.style.transform = currentTransform.replace(/translate\([^)]+\)/, 
+        `translate(${index < 8 ? '-' : ''}${10 + (index % 5) * 5}px, ${yOffset}px)`)
+    }
+  })
+    // Ajustar corazones según scroll - evitando slider y productos
+  hearts.forEach((heart, index) => {
+    // Reducir opacidad en sección de productos
+    let heartOpacity = 0.3
+    if (isProductSection) {
+      heartOpacity = 0.15
+    }
+    
+    // Mantener corazones más visibles en áreas de footer y header
+    if (scrollPosition < 0.15 || scrollPosition > 0.85) {
+      heartOpacity = 0.35
+    }
+    
+    heart.style.opacity = heartOpacity.toString()
+    
+    // Ajustar posición para mantener en los bordes
+    const currentTransform = heart.style.transform || ''
+    if (currentTransform.includes('scale')) {
+      const scale = 0.9 + (scrollPosition * 0.3)
+      heart.style.transform = currentTransform.replace(/scale\([^)]+\)/, `scale(${scale})`)
+    }
+  })
+}
+
+// Función para animar joyas al mover el ratón - manteniéndolas en los bordes
+const handleMouseMove = (event) => {
+  const jewels = document.querySelectorAll('.jewel')
+  const hearts = document.querySelectorAll('.heart')
+  const mouseX = event.clientX / window.innerWidth
+  const mouseY = event.clientY / window.innerHeight
+  
+  // Verifica si el mouse está sobre el slider o sección de productos
+  const isMouseOverContent = () => {
+    // Coordenadas aproximadas del centro de la página (donde están el slider y productos)
+    return mouseX > 0.2 && mouseX < 0.8 && mouseY > 0.3 && mouseY < 0.7
+  }
+  
+  // Animar joyas - manteniéndolas en los bordes
+  jewels.forEach((jewel, index) => {
+    const factor = (index % 5 + 1) * 1.5
+    const scrollPosition = window.scrollY / document.body.scrollHeight
+    
+    // Calcular offset limitado para mantener las joyas en los bordes
+    let offsetX = (mouseX - 0.5) * 20 * factor
+    let offsetY = (mouseY - 0.5) * 20 * factor
+      // Si el mouse está sobre contenido, disminuir la opacidad
+    if (isMouseOverContent()) {
+      jewel.style.opacity = '0.15'
+    } else {
+      jewel.style.opacity = '0.25'
+    }
+    
+    // Movimiento más suave con transición CSS
+    jewel.style.transition = 'transform 0.8s ease-out, opacity 0.5s ease-out'
+    jewel.style.transform = `translate(${offsetX}px, ${offsetY}px) rotate(${index * 10 + scrollPosition * 360}deg) scale(${1 + (mouseY * 0.1)})`
+  })
+  
+  // Animar corazones - manteniéndolos en los bordes
+  hearts.forEach((heart, index) => {
+    const factor = (index % 3 + 1) * 1.2
+    const scrollPosition = window.scrollY / document.body.scrollHeight
+    
+    // Calcular offset limitado para mantener corazones en los bordes
+    let offsetX = (mouseX - 0.5) * 20 * factor
+    let offsetY = (mouseY - 0.5) * 20 * factor    // Si el mouse está sobre contenido, disminuir la opacidad
+    if (isMouseOverContent()) {
+      heart.style.opacity = '0.15'
+    } else {
+      // Aplicar un efecto de brillo a los emojis cercanos al cursor
+      const heartRect = heart.getBoundingClientRect();
+      const heartCenterX = heartRect.left + heartRect.width / 2;
+      const heartCenterY = heartRect.top + heartRect.height / 2;
+      const distance = Math.sqrt(
+        Math.pow(event.clientX - heartCenterX, 2) + 
+        Math.pow(event.clientY - heartCenterY, 2)
+      );
+      
+      // Si el cursor está cerca, aumentar ligeramente la opacidad y el brillo
+      if (distance < 150) {
+        heart.style.opacity = '0.4';
+        heart.style.filter = 'drop-shadow(0 0 8px rgba(255, 105, 180, 0.4))';
+      } else {
+        heart.style.opacity = '0.3';
+        heart.style.filter = 'drop-shadow(0 0 5px rgba(255, 20, 147, 0.2))';
+      }
+    }
+    
+    // Movimiento más suave para corazones
+    heart.style.transition = 'transform 1s ease-out, opacity 0.5s ease-out'
+    heart.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${1.1 + (mouseX * 0.2)}) rotate(${scrollPosition * 180}deg)`
+  })
+}
 </script>
 
 <style scoped>
@@ -927,69 +1073,197 @@ onBeforeUnmount(() => {
   border-radius: 1rem;
 }
 
+/* Animación de joyas flotantes */
+.jewels-animation {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  pointer-events: none;
+}
+
+.jewel {
+  width: 40px;
+  height: 40px;
+  animation: float 25s infinite ease-in-out;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 8px 25px rgba(255, 105, 180, 0.2);
+  opacity: 0.25;
+  transform-origin: center;
+  z-index: 100;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+  pointer-events: none; /* Asegura que no interfiera con clics */
+}
+
+.jewel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.6) 10%, transparent 70%);
+  mix-blend-mode: overlay;
+}
+
+/* Formas específicas de joyas - posicionadas principalmente en los bordes */
+.jewel-1 { 
+  left: 2%; top: 5%; animation-delay: 0s; width: 40px; height: 40px; 
+  background-image: url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=100');
+  border-radius: 50%; /* Forma circular para anillos */
+}
+.jewel-2 { 
+  left: 3%; top: 25%; animation-delay: 1s; width: 35px; height: 50px; 
+  background-image: url('https://images.unsplash.com/photo-1588444837495-c6cfeb53f32d?w=100');
+  border-radius: 35% 35% 5% 5%; /* Forma para aretes colgantes */
+  transform: rotate(0deg);
+}
+.jewel-3 { 
+  left: 5%; top: 45%; animation-delay: 2s; width: 45px; height: 20px; 
+  background-image: url('https://images.unsplash.com/photo-1601821765780-754fa98637c1?w=100');
+  border-radius: 30px; /* Forma alargada para pulseras */
+}
+.jewel-4 { 
+  left: 2%; top: 65%; animation-delay: 3s; width: 45px; height: 45px; 
+  background-image: url('https://images.unsplash.com/photo-1603561596112-0a132b757442?w=100');
+  border-radius: 8px; /* Forma cuadrada para piedras */
+}
+.jewel-5 { 
+  left: 4%; top: 85%; animation-delay: 4s; width: 30px; height: 60px; 
+  background-image: url('https://images.unsplash.com/photo-1611955167811-4711904bb9f8?w=100');
+  border-radius: 50% 50% 5% 5%; /* Forma para pendientes largos */
+}
+.jewel-6 { 
+  right: 2%; top: 5%; animation-delay: 5s; width: 35px; height: 35px; 
+  background-image: url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=100');
+  border-radius: 50%; /* Forma circular para anillos */
+}
+.jewel-7 { 
+  right: 4%; top: 25%; animation-delay: 6s; width: 45px; height: 25px; 
+  background-image: url('https://images.unsplash.com/photo-1588444837495-c6cfeb53f32d?w=100');
+  border-radius: 0% 0% 50% 50%; /* Forma de media luna para diademas */
+}
+.jewel-8 { 
+  right: 3%; top: 45%; animation-delay: 7s; width: 25px; height: 60px; 
+  background-image: url('https://images.unsplash.com/photo-1601821765780-754fa98637c1?w=100');
+  border-radius: 0 0 50% 50%; /* Forma para collares colgantes */
+}
+.jewel-9 { 
+  right: 5%; top: 65%; animation-delay: 8s; width: 50px; height: 20px; 
+  background-image: url('https://images.unsplash.com/photo-1603561596112-0a132b757442?w=100');
+  border-radius: 25px; /* Forma para brazaletes */
+}
+.jewel-10 { 
+  right: 2%; top: 85%; animation-delay: 9s; width: 40px; height: 40px; 
+  background-image: url('https://images.unsplash.com/photo-1611955167811-4711904bb9f8?w=100');
+  border-radius: 5px; /* Forma cuadrada para dijes */
+  transform: rotate(45deg);
+}
+.jewel-11 { 
+  left: 15%; bottom: 2%; animation-delay: 10s; width: 30px; height: 45px; 
+  background-image: url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=100');
+  border-radius: 50% 50% 0 0; /* Forma para aretes de botón */
+}
+.jewel-12 { 
+  right: 15%; bottom: 2%; animation-delay: 11s; width: 55px; height: 20px; 
+  background-image: url('https://images.unsplash.com/photo-1588444837495-c6cfeb53f32d?w=100');
+  border-radius: 25px; /* Forma para pulseras */
+}
+.jewel-13 { 
+  left: 35%; bottom: 5%; animation-delay: 12s; width: 30px; height: 30px; 
+  background-image: url('https://images.unsplash.com/photo-1601821765780-754fa98637c1?w=100');
+  border-radius: 50%; /* Forma circular para anillos */
+  transform: rotate(30deg);
+}
+.jewel-14 { 
+  right: 35%; bottom: 5%; animation-delay: 13s; width: 40px; height: 50px; 
+  background-image: url('https://images.unsplash.com/photo-1603561596112-0a132b757442?w=100');
+  border-radius: 50% 50% 10% 10%; /* Forma para colgantes */
+}
+.jewel-15 { 
+  left: 50%; bottom: 3%; animation-delay: 14s; width: 45px; height: 25px; 
+  background-image: url('https://images.unsplash.com/photo-1611955167811-4711904bb9f8?w=100');
+  border-radius: 25px; /* Forma para broches */
+}
+
+/* Animación para los emojis de corazones */
+.heart {
+  animation: floatHeart 18s infinite ease-in-out;
+  font-size: 30px;
+  filter: drop-shadow(0 0 5px rgba(255, 20, 147, 0.2));
+  z-index: 100;
+  opacity: 0.3;
+  pointer-events: none;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1));
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.heart-1 { left: 6%; top: 8%; animation-delay: 0.5s; }
+.heart-2 { right: 6%; top: 8%; animation-delay: 2s; }
+.heart-3 { left: 5%; top: 35%; animation-delay: 3.5s; }
+.heart-4 { right: 5%; top: 35%; animation-delay: 5s; }
+.heart-5 { left: 4%; top: 65%; animation-delay: 6.5s; }
+.heart-6 { right: 4%; top: 65%; animation-delay: 8s; }
+.heart-7 { left: 10%; bottom: 5%; animation-delay: 9.5s; }
+.heart-8 { right: 10%; bottom: 5%; animation-delay: 11s; }
+.heart-9 { left: 30%; bottom: 8%; animation-delay: 12.5s; }
+.heart-10 { right: 30%; bottom: 8%; animation-delay: 14s; }
+
+@keyframes float {
+  0% {
+    transform: translateX(0) translateY(100vh) rotate(0deg) scale(0.8);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.2;
+  }
+  20% {
+    transform: translateX(20px) translateY(80vh) rotate(90deg) scale(1);
+  }
+  40% {
+    transform: translateX(-20px) translateY(60vh) rotate(180deg) scale(1.1);
+    opacity: 0.25;
+  }
+  60% {
+    transform: translateX(15px) translateY(40vh) rotate(270deg) scale(1);
+  }
+  80% {
+    transform: translateX(-15px) translateY(20vh) rotate(320deg) scale(0.9);
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateX(0) translateY(-100px) rotate(360deg) scale(0.7);
+    opacity: 0;
+  }
+}
+
+@keyframes floatHeart {
+  0% {
+    transform: translateX(0) translateY(100vh) scale(0.8) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.2;
+  }
+  30% {
+    transform: translateX(15px) translateY(70vh) scale(1.2) rotate(10deg);
+  }
+  50% {
+    transform: translateX(-15px) translateY(40vh) scale(1.3) rotate(-10deg);
+    opacity: 0.3;
+  }
+  70% {
+    transform: translateX(10px) translateY(20vh) scale(1.1) rotate(5deg);
+  }
+  90% {
+    opacity: 0.15;
+  }
+  100% {
+    transform: translateX(0) translateY(-50px) scale(0.7) rotate(0deg);
+    opacity: 0;
+  }
+}
+
 .slider-wrapper {
   display: flex;
   transition: transform 0.5s ease-in-out;
-}
-
-.slide {
-  min-width: 100%;
-  transition: opacity 0.5s;
-}
-
-.slide img {
-  width: 100%;
-  border-radius: 1rem;
-}
-
-.slide-content {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 1rem;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
-  color: white;
-}
-
-.slider-nav {
-  position: absolute;
-  top: 50%;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  transform: translateY(-50%);
-}
-
-.nav-button {
-  background: rgba(255, 255, 255, 0.3);
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.nav-button:hover {
-  background: rgba(255, 255, 255, 0.5);
-}
-
-.nav-dot {
-  height: 8px;
-  width: 8px;
-  margin: 0 4px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.5);
-  cursor: pointer;
-  transition: transform 0.3s;
-}
-
-.nav-dot.active {
-  transform: scale(1.2);
-  background: white;
 }
 </style>
