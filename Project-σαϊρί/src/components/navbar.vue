@@ -65,8 +65,56 @@
           <span class="text-sm font-medium">Menú</span>
         </button>
       </div>
-    </nav>
-  </header>
+    </nav>  </header>
+
+    <!-- Menú móvil -->
+    <transition name="mobile-nav">
+      <div v-if="showMobileMenu" class="md:hidden fixed inset-0 z-40">
+        <!-- Overlay de fondo -->
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" @click="toggleMobileMenu"></div>
+        
+        <!-- Panel de navegación móvil -->
+        <div class="absolute right-0 top-0 h-full w-64 bg-white shadow-xl p-5 transform transition-all">
+          <!-- Cabecera del menú móvil -->
+          <div class="flex justify-between items-center mb-6 pb-2 border-b">
+            <span class="font-dancing text-pink-500 text-xl">Menú</span>
+            <button @click="toggleMobileMenu" class="p-2 rounded-full hover:bg-pink-50 transition-all">
+              <X class="w-5 h-5 text-gray-500" />
+            </button>
+          </div>
+          
+          <!-- Enlaces de navegación -->
+          <nav class="flex flex-col space-y-1">
+            <a 
+              v-for="item in menuItems"
+              :key="item.id"
+              :href="item.href"
+              @click.prevent="handleMobileNavClick($event, item.id)"
+              class="px-4 py-3 flex items-center space-x-3 rounded-lg hover:bg-pink-50 transition-all"
+              :class="{ 'bg-pink-50 text-pink-500': activeSection === item.id }"
+            >
+              <component :is="item.icon" class="w-5 h-5" :class="{ 'text-pink-500': activeSection === item.id }" />
+              <span>{{ item.text }}</span>
+            </a>
+          </nav>
+          
+          <!-- Redes sociales -->
+          <div class="mt-8 pt-4 border-t">
+            <p class="text-sm text-gray-500 mb-3">Síguenos en redes</p>
+            <div class="flex space-x-2">
+              <a :href="instagramUrl" target="_blank" rel="noopener noreferrer"
+                class="p-2 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 text-white">
+                <Instagram class="w-5 h-5" />
+              </a>
+              <a :href="whatsappUrl" target="_blank" rel="noopener noreferrer"
+                class="p-2 rounded-full bg-green-500 text-white">
+                <MessageCircle class="w-5 h-5" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>
 
       <!-- Hero Section con Instagram Posts -->
       <section id="inicio" class="pt-24 pb-16 bg-gradient-to-br from-pink-100 via-purple-50 to-white">
@@ -1098,6 +1146,17 @@ onBeforeUnmount(() => {
   transform: translateY(-10px);
 }
 
+/* Transiciones específicas para el panel lateral */
+.mobile-nav-enter-active .w-64,
+.mobile-nav-leave-active .w-64 {
+  transition: transform 0.3s ease-out;
+}
+
+.mobile-nav-enter-from .w-64,
+.mobile-nav-leave-to .w-64 {
+  transform: translateX(100%);
+}
+
 /* Media query para móviles */
 @media (max-width: 768px) {
   .mobile-nav-link {
@@ -1183,6 +1242,7 @@ onBeforeUnmount(() => {
   font-weight: 600;
   background: linear-gradient(to right, #ff69b4, #ff1493);
   -webkit-background-clip: text;
+  background-clip: text;
   color: transparent;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
 }
