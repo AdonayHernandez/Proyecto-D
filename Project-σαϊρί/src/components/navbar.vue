@@ -4,215 +4,112 @@
     <div class="relative z-1">
       <!-- Header y contenido existente -->
       <header class="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
-    <nav class="container mx-auto px-4 py-2">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center">
-          <router-link to="/" class="flex items-center">
-            <img src="../assets/logo.png" alt="Logo Joyería Tu Estilo" class="w-12 h-12 mr-2">
-            <span class="text-title font-dancing">Joyería Tu Estilo</span>
-          </router-link>
-        </div>
-        
-        <!-- Menú de escritorio mejorado -->
-        <div class="hidden md:flex items-center space-x-8">
-          <a 
-            v-for="item in menuItems"
-            :key="item.id"
-            :href="item.href"
-            @click.prevent="scrollToSection(item.id)"
-            class="relative group flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300"
-            :class="[
-              activeSection === item.id 
-                ? 'text-pink-500 bg-pink-50' 
-                : 'text-gray-700 hover:bg-gray-50'
-            ]"
-          >
-            <component :is="item.icon" 
-                      class="w-5 h-5 text-gray-400 group-hover:text-pink-500 transition-colors" 
-                      :class="{ 'text-pink-500': activeSection === item.id }" />
-            <span class="font-medium text-gray-700 group-hover:text-pink-500"
-                  :class="{ 'text-pink-500': activeSection === item.id }">
-              {{ item.text }}
-            </span>
-          </a>
-        </div>
-          <!-- Botones de redes sociales con animaciones y etiquetas -->
-        <div class="hidden md:flex items-center space-x-4 ml-4 border-l pl-4 border-gray-200">
-          <a :href="instagramUrl" target="_blank" rel="noopener noreferrer"
-             class="flex items-center px-3 py-1.5 text-gray-600 hover:text-white hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-500 rounded-full transition-all duration-300 transform hover:scale-105 group">
-            <Instagram class="w-5 h-5 mr-1.5 group-hover:text-white" />
-            <span class="text-sm font-medium">Instagram</span>
-          </a>
-          <a :href="whatsappUrl" target="_blank" rel="noopener noreferrer"
-             class="flex items-center px-3 py-1.5 text-gray-600 hover:text-white hover:bg-green-500 rounded-full transition-all duration-300 transform hover:scale-105 group">
-            <MessageCircle class="w-5 h-5 mr-1.5 group-hover:text-white" />
-            <span class="text-sm font-medium">WhatsApp</span>
-          </a>
-        </div>
-          <!-- Botón menú móvil mejorado -->
-        <button 
-          @click="toggleMobileMenu" 
-          class="md:hidden relative flex items-center space-x-1 px-3 py-2 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 text-white hover:shadow-md transition-all duration-300"
-          :aria-expanded="showMobileMenu"
-          aria-label="Menú principal"
-        >
-          <div class="relative w-5 h-5">
-            <transition name="menu-icon">
+        <nav class="container mx-auto px-4 py-2">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <a href="#" class="flex items-center">
+                <img src="../assets/logo.png" alt="Logo Joyería Tu Estilo" class="w-12 h-12 mr-2">
+                <span class="text-title font-dancing">Joyería Tu Estilo</span>
+              </a>
+            </div>
+
+            <!-- Menú de escritorio -->
+            <div class="hidden md:flex items-center space-x-8">
+              <a 
+                v-for="item in menuItems"
+                :key="item.id"
+                :href="item.href"
+                @click.prevent="scrollToSection(item.id)"
+                class="relative group flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300"
+                :class=" [
+                  activeSection === item.id 
+                    ? 'text-pink-500 bg-pink-50' 
+                    : 'text-gray-700 hover:bg-gray-50'
+                ]"
+              >
+                <component :is="item.icon" 
+                          class="w-5 h-5 text-gray-400 group-hover:text-pink-500 transition-colors" 
+                          :class="{ 'text-pink-500': activeSection === item.id }" />
+                <span class="font-medium text-gray-700 group-hover:text-pink-500"
+                      :class="{ 'text-pink-500': activeSection === item.id }">
+                  {{ item.text }}
+                </span>
+              </a>
+            </div>
+
+            <!-- Botón menú móvil -->
+            <button 
+              @click="toggleMobileMenu" 
+              class="md:hidden relative flex items-center space-x-1 px-3 py-2 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 text-white hover:shadow-md transition-all duration-300"
+            >
               <Menu v-if="!showMobileMenu" class="w-5 h-5" />
               <X v-else class="w-5 h-5" />
-            </transition>
-          </div>
-          <span class="text-sm font-medium">Menú</span>
-        </button>
-      </div>
-    </nav>  </header>
-
-    <!-- Menú móvil -->
-    <transition name="mobile-nav">
-      <div v-if="showMobileMenu" class="md:hidden fixed inset-0 z-40">
-        <!-- Overlay de fondo -->
-        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" @click="toggleMobileMenu"></div>
-        
-        <!-- Panel de navegación móvil -->
-        <div class="absolute right-0 top-0 h-full w-64 bg-white shadow-xl p-5 transform transition-all">
-          <!-- Cabecera del menú móvil -->
-          <div class="flex justify-between items-center mb-6 pb-2 border-b">
-            <span class="font-dancing text-pink-500 text-xl">Menú</span>
-            <button @click="toggleMobileMenu" class="p-2 rounded-full hover:bg-pink-50 transition-all">
-              <X class="w-5 h-5 text-gray-500" />
+              <span class="text-sm font-medium">Menú</span>
             </button>
           </div>
-          
-          <!-- Enlaces de navegación -->
-          <nav class="flex flex-col space-y-1">
-            <a 
-              v-for="item in menuItems"
-              :key="item.id"
-              :href="item.href"
-              @click.prevent="handleMobileNavClick($event, item.id)"
-              class="px-4 py-3 flex items-center space-x-3 rounded-lg hover:bg-pink-50 transition-all"
-              :class="{ 'bg-pink-50 text-pink-500': activeSection === item.id }"
-            >
-              <component :is="item.icon" class="w-5 h-5" :class="{ 'text-pink-500': activeSection === item.id }" />
-              <span>{{ item.text }}</span>
-            </a>
-          </nav>
-          
-          <!-- Redes sociales -->
-          <div class="mt-8 pt-4 border-t">
-            <p class="text-sm text-gray-500 mb-3">Síguenos en redes</p>
-            <div class="flex space-x-2">
-              <a :href="instagramUrl" target="_blank" rel="noopener noreferrer"
-                class="p-2 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 text-white">
-                <Instagram class="w-5 h-5" />
-              </a>
-              <a :href="whatsappUrl" target="_blank" rel="noopener noreferrer"
-                class="p-2 rounded-full bg-green-500 text-white">
-                <MessageCircle class="w-5 h-5" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </transition>
+        </nav>
+      </header>
 
-      <!-- Hero Section con Instagram Posts -->
-      <section id="inicio" class="pt-24 pb-16 bg-gradient-to-br from-pink-100 via-purple-50 to-white">
+      <!-- Hero Section con Slider -->
+      <section id="inicio" class="pt-24 pb-16 bg-gradient-to-br from-pink-50 via-pink-100/30 to-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <!-- Textos del hero -->
-          <div class="text-center mb-16">
-            <h2 class="animate-text text-4xl md:text-6xl font-bold text-gray-800">
+          <div class="text-center mb-12 md:mb-16 relative">
+            <h2 class="animate-text text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-pink-400 mb-4 transform hover:scale-105 transition-transform duration-300">
               Encuentra La Joya Perfecta
             </h2>
-            <p class="animate-text text-xl md:text-2xl mt-6 text-gray-600 max-w-3xl mx-auto">
+            <p class="animate-text text-lg sm:text-xl md:text-2xl mt-6 text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Accesorios exclusivos para complementar tu estilo único
             </p>
+            <div class="absolute -top-10 left-1/2 transform -translate-x-1/2 w-64 h-64 bg-pink-200 rounded-full filter blur-3xl opacity-20 animate-pulse"></div>
           </div>
-          
-          <!-- Instagram Feed -->
-          <div class="mb-8 text-center">
-            <h3 class="text-2xl font-semibold mb-2">Nuestras Creaciones</h3>
-            <p class="text-gray-600 mb-8">Síguenos en Instagram para ver nuestras últimas novedades</p>
-          </div>
-          
-          <!-- Loading State -->
-          <div v-if="loading" class="flex justify-center items-center py-12">
-            <RefreshCw class="w-8 h-8 text-pink-500 animate-spin" />
-          </div>
-          
-          <!-- Error State -->
-          <div v-else-if="error" class="bg-red-50 text-red-500 p-4 rounded-lg text-center">
-            {{ error }}
-          </div>
-          
-          <!-- Instagram Grid -->
-          <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-            <div 
-              v-for="post in instagramPosts" 
-              :key="post.id"
-              class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
-            >
-              <!-- Imagen -->
-              <div class="aspect-square relative overflow-hidden">
-                <img 
-                  :src="post.media_url" 
-                  :alt="post.caption || 'Instagram post'"
-                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                
-                <!-- Overlay con caption -->
-                <div class="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                  <p class="text-white text-sm line-clamp-3">{{ post.caption }}</p>
+
+          <!-- Slider adaptativo -->
+          <div class="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden rounded-2xl group shadow-2xl">
+            <div class="absolute w-full h-full flex transition-transform duration-1000 ease-out"
+                 :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
+              <div v-for="(slide, index) in slides" 
+                   :key="index" 
+                   class="w-full h-full flex-shrink-0 relative">
+                <img :src="slide.image" 
+                     :alt="slide.title"
+                     class="w-full h-full object-cover transition-all duration-1000"
+                     :class="{ 'scale-110 blur-sm': currentSlide !== index, 'scale-100': currentSlide === index }"
+                     loading="lazy">
+                <div class="absolute inset-0 bg-gradient-to-t from-pink-900/80 via-pink-500/20 to-transparent opacity-70 transition-opacity duration-500"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8 transform transition-all duration-700"
+                     :class="[currentSlide === index ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0']">
+                  <h3 class="text-white text-2xl sm:text-3xl md:text-4xl font-bold mb-2 md:mb-4 tracking-tight">{{ slide.title }}</h3>
+                  <p class="text-white/90 text-base sm:text-lg md:text-xl max-w-2xl leading-relaxed font-light">{{ slide.description }}</p>
                 </div>
               </div>
-              
-              <!-- Acciones -->
-              <div class="p-3 flex justify-between items-center">
-                <a 
-                  :href="post.permalink" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  class="text-xs text-pink-500 hover:underline"
-                >
-                  Ver en Instagram
-                </a>
-                <a 
-                  :href="getWhatsAppLink(post)" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  class="flex items-center space-x-1 text-xs text-green-600 hover:underline"
-                >
-                  <MessageCircle class="w-3 h-3" />
-                  <span>Consultar</span>
-                </a>
-              </div>
             </div>
-          </div>
-          
-          <!-- Load More Button -->
-          <div v-if="instagramPosts.length > 0 && hasMore" class="text-center mt-4 mb-8">
-            <button 
-              @click="loadMorePosts" 
-              class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-pink-500 hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 transition-colors"
-              :disabled="loadingMore"
-            >
-              <RefreshCw v-if="loadingMore" class="w-4 h-4 mr-2 animate-spin" />
-              <span>{{ loadingMore ? 'Cargando...' : 'Ver más' }}</span>
+
+            <!-- Controles del slider -->
+            <button @click="prevSlide"
+                    @mouseenter="stopAutoplay"
+                    @mouseleave="startAutoplay"
+                    class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 p-2 sm:p-3 md:p-4 rounded-full bg-pink-500/20 backdrop-blur-md hover:bg-pink-500/40 transition-all duration-300 opacity-0 group-hover:opacity-100 transform hover:scale-110">
+              <ChevronLeft class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" />
             </button>
-          </div>
-          
-          <!-- Instagram Follow -->
-          <div class="text-center mt-8">
-            <a 
-              :href="instagramProfileUrl" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              class="inline-flex items-center px-5 py-3 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 text-white font-medium shadow-md hover:shadow-lg transform transition-all duration-300 hover:-translate-y-1"
-            >
-              <Instagram class="w-5 h-5 mr-2" />
-              Síguenos en Instagram
-            </a>
+            <button @click="nextSlide"
+                    @mouseenter="stopAutoplay"
+                    @mouseleave="startAutoplay"
+                    class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 p-2 sm:p-3 md:p-4 rounded-full bg-pink-500/20 backdrop-blur-md hover:bg-pink-500/40 transition-all duration-300 opacity-0 group-hover:opacity-100 transform hover:scale-110">
+              <ChevronRight class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" />
+            </button>
+
+            <!-- Indicadores -->
+            <div class="absolute -bottom-4 left-0 right-0 flex justify-center space-x-2 md:space-x-3 z-10">
+              <button v-for="(_, index) in slides" 
+                      :key="index"
+                      @click="setSlide(index)"
+                      @mouseenter="stopAutoplay"
+                      @mouseleave="startAutoplay"
+                      class="w-12 sm:w-16 md:w-20 h-1.5 rounded-full transition-all duration-500 transform hover:scale-110"
+                      :class="[currentSlide === index ? 'bg-pink-500 w-16 sm:w-20 md:w-24' : 'bg-white/50 hover:bg-white']">
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -344,7 +241,7 @@
                   Desde San Miguel, toma la carretera hacia Moncagua. Al llegar al pueblo, sigue por la calle principal hasta identificar "Las piscinas El Capulín".
                 </p>
                 <div class="flex flex-wrap gap-2 mt-3">                  <a 
-                    :href="getDirectionsWhatsAppLink()"
+                    :href="whatsappUrl"
                     target="_blank"
                     class="text-sm text-green-600 hover:text-green-800 inline-flex items-center bg-green-50 hover:bg-green-100 px-3 py-1.5 rounded-full transition-colors"
                   >
@@ -362,18 +259,22 @@
                   </a>
                 </div>
               </div>
-            </div>            <div class="aspect-[16/9] w-full">
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3873.2669704581713!2d-88.25818468563658!3d13.53281860154693!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDMyJzA0LjYiTiA4OMKwMTUnMjYuNSJX!5e0!3m2!1ses!2ssv!4v1654694325788!5m2!1ses!2ssv"
-                width="100%" 
-                height="450" 
-                style="border:0;" 
-                allowfullscreen="" 
-                loading="lazy" 
-                referrerpolicy="no-referrer-when-downgrade"
-                class="w-full"
-                title="Mapa de ubicación en Moncagua, frente a piscinas El Capulín"
-              ></iframe>
+            </div>            <div class="aspect-[16/9] w-full bg-gray-100 rounded-lg relative overflow-hidden">
+              <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-pink-500 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <h3 class="text-xl font-medium mb-2">Moncagua, San Miguel</h3>
+                <p class="text-gray-600 mb-4">Frente a las piscinas El Capulín</p>
+                <a 
+                  href="https://maps.app.goo.gl/hytGZs9mdFftJ4xm8" 
+                  target="_blank" 
+                  class="px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition-all"
+                >
+                  Ver en Google Maps
+                </a>
+              </div>
             </div>
           </div>
           
@@ -568,24 +469,26 @@
                   <span>Horario de entregas: Lunes a Sábado, 9:00 AM - 6:00 PM</span>
                 </div>
               </div>
-              
-              <div class="rounded-xl overflow-hidden mb-6 border border-gray-200">
-                <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d969.3210042538222!2d-88.25632663032436!3d13.532683494407246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f659c9a1e4a16bb%3A0xa4e16215ef01c63!2sParque%20Central%20de%20Moncagua!5e0!3m2!1ses!2ssv!4v1654694325788!5m2!1ses!2ssv"
-                  width="100%" 
-                  height="350" 
-                  style="border:0;" 
-                  allowfullscreen="" 
-                  loading="lazy" 
-                  referrerpolicy="no-referrer-when-downgrade"
-                  class="w-full"
-                  title="Mapa del Parque Central de Moncagua - Punto de entrega principal"
-                ></iframe>
+                <div class="rounded-xl overflow-hidden mb-6 border border-gray-200 bg-gray-100 h-[350px] relative">
+                <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-pink-500 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <h3 class="text-xl font-medium mb-2">Parque Central de Moncagua</h3>
+                  <p class="text-gray-600 mb-4">Punto de entrega principal</p>
+                  <a 
+                    href="https://maps.app.goo.gl/hytGZs9mdFftJ4xm8" 
+                    target="_blank" 
+                    class="px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition-all"
+                  >
+                    Ver en Google Maps
+                  </a>
+                </div>
               </div>
               
-              <div class="flex flex-wrap gap-3 justify-center">
-                <a 
-                  :href="getDirectionsWhatsAppLink()"
+              <div class="flex flex-wrap gap-3 justify-center">                <a 
+                  :href="whatsappUrl"
                   target="_blank"
                   class="inline-flex items-center px-4 py-2 bg-green-500 hover:bg-green-600 text-white font-medium rounded-lg shadow-sm hover:shadow-md transition-colors"
                 >
@@ -688,49 +591,39 @@
 
 <script setup>
 import { ref, onMounted, onBeforeUnmount, computed } from 'vue'
-import { Home, ShoppingBag, MapPin, Phone, Instagram, MessageCircle, Menu, X, RefreshCw } from 'lucide-vue-next'
+import { Home, ShoppingBag, MapPin, Phone, Instagram, MessageCircle, Menu, X, RefreshCw, ChevronLeft, ChevronRight } from 'lucide-vue-next'
 
-// Variables reactivas
+// Variables reactivas básicas
 const showMobileMenu = ref(false)
 const isScrolled = ref(false)
 const activeSection = ref('inicio')
-const instagramPosts = ref([])
-const productPosts = ref([])
-const loading = ref(true)
-const loadingProducts = ref(true)
-const loadingMore = ref(false)
-const error = ref(null)
+const loadingProducts = ref(false)
 const errorProducts = ref(null)
-const hasMore = ref(true)
-const nextPageToken = ref(null)
+const productPosts = ref([
+  {
+    id: '1',
+    media_url: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338',
+    caption: 'Anillos de plata con piedras naturales',
+    permalink: 'https://instagram.com/'
+  },
+  {
+    id: '2',
+    media_url: 'https://images.unsplash.com/photo-1588444837495-c6cfeb53f32d',
+    caption: 'Aretes artesanales',
+    permalink: 'https://instagram.com/'
+  },
+  {
+    id: '3',
+    media_url: 'https://images.unsplash.com/photo-1601821765780-754fa98637c1',
+    caption: 'Collares premium',
+    permalink: 'https://instagram.com/'
+  }
+])
 
-// Formulario de contacto
-const contactForm = ref({
-  name: '',
-  email: '',
-  phone: '',
-  message: '',
-  consent: false
-})
-const isSubmitting = ref(false)
-const formSuccess = ref(false)
-const formError = ref(null)
-
-// Validación del formulario
-const isFormValid = computed(() => {
-  return (
-    contactForm.value.name.trim() !== '' && 
-    contactForm.value.email.trim() !== '' && 
-    /^\S+@\S+\.\S+$/.test(contactForm.value.email) && 
-    contactForm.value.message.trim() !== '' && 
-    contactForm.value.consent
-  )
-})
-
-// URLs de redes sociales
+// URLs y constantes
 const instagramUrl = 'https://www.instagram.com/joyeria_tu_estilo_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=='
 const whatsappUrl = 'https://wa.me/+50372011707'
-const instagramProfileUrl = 'https://www.instagram.com/joyeria_tu_estilo_/'
+const instagramProfileUrl = 'https://www.instagram.com/joyeria_tu_estilo_'
 const whatsAppNumber = '+50372011707'
 
 // Items del menú
@@ -741,7 +634,74 @@ const menuItems = [
   { id: 'contacto', text: 'Contacto', href: '#contacto', icon: Phone }
 ]
 
-// Métodos
+// Variables y funciones del slider
+const slidesData = [
+  {
+    image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=1920',
+    title: '✨ Colección Primavera 2025',
+    description: 'Descubre nuestras piezas más exclusivas en oro rosa y piedras naturales'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1588444837495-c6cfeb53f32d?q=80&w=1920',
+    title: '💎 Aretes Artesanales',
+    description: 'Cada pieza cuenta una historia única, diseñada para brillar'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1601821765780-754fa98637c1?q=80&w=1920',
+    title: '💫 Collares Premium',
+    description: 'Elegancia atemporal en cada detalle'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1603561596112-0a132b757442?q=80&w=1920',
+    title: '💝 Regalos Especiales',
+    description: 'El detalle perfecto para esa persona única'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1611955167811-4711904bb9f8?q=80&w=1920',
+    title: '👑 Nueva Colección',
+    description: 'Diseños exclusivos que definen tu estilo'
+  }
+]
+
+const slides = ref(slidesData)
+const currentSlide = ref(0)
+const autoplayInterval = ref(null)
+const autoplayDelay = 5000 // 5 segundos por slide
+
+// Funciones del slider
+const nextSlide = () => {
+  currentSlide.value = (currentSlide.value + 1) % slides.value.length
+}
+
+const prevSlide = () => {
+  currentSlide.value = (currentSlide.value - 1 + slides.value.length) % slides.value.length
+}
+
+const setSlide = (index) => {
+  currentSlide.value = index
+  restartAutoplay()
+}
+
+const startAutoplay = () => {
+  stopAutoplay()
+  autoplayInterval.value = setInterval(() => {
+    nextSlide()
+  }, autoplayDelay)
+}
+
+const stopAutoplay = () => {
+  if (autoplayInterval.value) {
+    clearInterval(autoplayInterval.value)
+    autoplayInterval.value = null
+  }
+}
+
+const restartAutoplay = () => {
+  stopAutoplay()
+  startAutoplay()
+}
+
+// Funciones de navegación y utilidades
 const toggleMobileMenu = () => {
   showMobileMenu.value = !showMobileMenu.value
   if (showMobileMenu.value) {
@@ -749,12 +709,6 @@ const toggleMobileMenu = () => {
   } else {
     document.body.classList.remove('overflow-hidden')
   }
-}
-
-const handleMobileNavClick = (event, sectionId) => {
-  event.preventDefault()
-  scrollToSection(sectionId)
-  toggleMobileMenu()
 }
 
 const scrollToSection = (sectionId) => {
@@ -773,356 +727,46 @@ const scrollToSection = (sectionId) => {
   }
 }
 
-const handleScroll = () => {
-  const scrollY = window.scrollY
-  isScrolled.value = scrollY > 10
-  
-  // Detectar sección activa según el scroll
-  const sections = menuItems.map(item => document.getElementById(item.id))
-  const filteredSections = sections.filter(Boolean)
-  
-  if (filteredSections.length > 0) {
-    for (let i = filteredSections.length - 1; i >= 0; i--) {
-      const section = filteredSections[i]
-      const rect = section.getBoundingClientRect()
-      if (rect.top <= 150) {
-        activeSection.value = section.id
-        break
-      }
-    }
-  }
+const handleMobileNavClick = (event, sectionId) => {
+  event.preventDefault()
+  scrollToSection(sectionId)
+  toggleMobileMenu()
 }
 
-// Función para obtener datos de demostración cuando no hay API disponible
-const fetchInstagramFeedDemo = async () => {
-  // Simulamos un retraso para que parezca una llamada a API real
-  await new Promise(resolve => setTimeout(resolve, 800))
-  
-  // Posts de ejemplo para desarrollo
-  const mockPosts = [
-    {
-      id: 'mock-1',
-      media_type: 'IMAGE',
-      media_url: 'https://scontent-mia3-1.cdninstagram.com/v/t51.29350-15/416093578_925376515805519_6204587438407816069_n.jpg?stp=dst-jpg_e35_p1080x1080&_nc_ht=scontent-mia3-1.cdninstagram.com&_nc_cat=108&_nc_ohc=l63U9V4DtbkAX-iZKMG&edm=APs17CUBAAAA&ccb=7-5&oh=00_AfCgKC-nt33-gm9zB5DF1I1vwZ2RQYSv6YdUvw3a1Nx2Lg&oe=6599DFF9&_nc_sid=10d13b',
-      caption: 'Anillos de plata con piedras naturales. Disponibles en todas las tallas. ✨💍 #Joyeria #Anillos',
-      permalink: 'https://www.instagram.com/p/DExUD_hJQpn/',
-      timestamp: new Date().toISOString()
-    },
-    {
-      id: 'mock-2',
-      media_type: 'IMAGE',
-      media_url: 'https://scontent-mia3-1.cdninstagram.com/v/t51.29350-15/418731064_934188625106273_8055244778637432844_n.jpg?stp=dst-jpg_e35_p1080x1080&_nc_ht=scontent-mia3-1.cdninstagram.com&_nc_cat=101&_nc_ohc=LZYMFPWjn9MAX9s9ZRn&edm=APs17CUBAAAA&ccb=7-5&oh=00_AfCsWpPfR-A1Hpqc-3TfZmH_SskrZcHIQS-PvRwHu0m-og&oe=659A9DEA&_nc_sid=10d13b',
-      caption: 'Aretes artesanales con acabados únicos. El complemento perfecto para cualquier ocasión. 💎 #JoyeriaTuEstilo',
-      permalink: 'https://www.instagram.com/p/DExUD_hJQpn/',
-      timestamp: new Date().toISOString()
-    },
-    {
-      id: 'mock-3',
-      media_type: 'IMAGE',
-      media_url: 'https://scontent-mia3-1.cdninstagram.com/v/t51.29350-15/417961325_7074003449294461_1222855484328336521_n.jpg?stp=dst-jpg_e35_p1080x1080&_nc_ht=scontent-mia3-1.cdninstagram.com&_nc_cat=105&_nc_ohc=FhgO2J5G6AIAX8loxcJ&edm=APs17CUBAAAA&ccb=7-5&oh=00_AfCTxEF04tpDdN1IZNIe8vPjVGRYJ7_pAQVm-qxXbvgTEA&oe=659A61B6&_nc_sid=10d13b',
-      caption: 'Collares de fantasía fina importados, acabados anti-alérgicos. Ideal para regalo. 🎁 #Collares #Moda',
-      permalink: 'https://www.instagram.com/p/DExUD_hJQpn/',
-      timestamp: new Date().toISOString()
-    }
-  ]
-
-  return {
-    data: mockPosts,
-    paging: {
-      cursors: {
-        after: 'mock_token_1'
-      },
-      next: true
-    }
-  }
-}
-
-// Función para simular carga de más posts de demostración
-const fetchMorePostsDemo = async () => {
-  // Simulamos un retraso para que parezca una llamada a API real
-  await new Promise(resolve => setTimeout(resolve, 1200))
-  
-  // Generamos más datos de ejemplo
-  const mockPosts = [
-    {
-      id: 'mock-more-1',
-      media_type: 'IMAGE',
-      media_url: 'https://scontent-mia3-1.cdninstagram.com/v/t51.29350-15/417870517_769218965282461_2280238888523666376_n.jpg?stp=dst-jpg_e35_p1080x1080&_nc_ht=scontent-mia3-1.cdninstagram.com&_nc_cat=103&_nc_ohc=DqP20rF1MmwAX98zWHw&edm=APs17CUBAAAA&ccb=7-5&oh=00_AfC4YVrFzIQNW4dLYrAYA4Ww93fkMlIqwTfh6MgGHhG2aA&oe=659A58D9&_nc_sid=10d13b',
-      caption: 'Anillos de compromiso, el símbolo perfecto de tu amor. Consulta disponibilidad. 💍 #Compromiso',
-      permalink: 'https://www.instagram.com/p/C9xCZ3dr4nS/',
-      timestamp: new Date().toISOString()
-    },
-    {
-      id: 'mock-more-2',
-      media_type: 'IMAGE',
-      media_url: 'https://scontent-mia3-1.cdninstagram.com/v/t51.29350-15/418742654_826384052879566_6093242414607391628_n.jpg?stp=dst-jpg_e35_p1080x1080&_nc_ht=scontent-mia3-1.cdninstagram.com&_nc_cat=109&_nc_ohc=fy27IXqyR0kAX92KwEp&edm=APs17CUBAAAA&ccb=7-5&oh=00_AfA3wRNtCQlpYV5_99SrHQYcjNHx0JcyJrn8gS1zcwMTLg&oe=6599EDC5&_nc_sid=10d13b',
-      caption: 'Aretes largos para eventos especiales. Elegancia y estilo garantizado. ✨ #EventosEspeciales',
-      permalink: 'https://www.instagram.com/p/C9xCWxLLi52/',
-      timestamp: new Date().toISOString()
-    },
-    {
-      id: 'mock-more-3',
-      media_type: 'IMAGE',
-      media_url: 'https://scontent-mia3-1.cdninstagram.com/v/t51.29350-15/417925913_1148328189728607_5631235117699863773_n.jpg?stp=dst-jpg_e35_p1080x1080&_nc_ht=scontent-mia3-1.cdninstagram.com&_nc_cat=106&_nc_ohc=9uFfHX4o6UcAX9I0vIl&edm=APs17CUBAAAA&ccb=7-5&oh=00_AfBP_D1-6GnxBu_oL3U_Oc1VjCSTUxgxc7P7YlvIbZUqHw&oe=659B10C6&_nc_sid=10d13b',
-      caption: 'Collares minimalistas, perfectos para el día a día. Envíos a domicilio. 🚚 #EstiloMinimalista',
-      permalink: 'https://www.instagram.com/p/C9xCSuJLX5O/',
-      timestamp: new Date().toISOString()
-    }
-  ]
-
-  return {
-    data: mockPosts,
-    paging: {
-      cursors: {
-        after: 'mock_token_2'
-      },
-      next: false
-    }
-  }
-}
-
-// Cargar posts de Instagram
-const loadInstagramPosts = async () => {
-  try {
-    loading.value = true
-    error.value = null
-    
-    // Obtener los posts de Instagram de nuestra función de demostración
-    const instagramFeed = await fetchInstagramFeedDemo()
-    instagramPosts.value = instagramFeed.data
-    hasMore.value = !!instagramFeed.paging?.next
-    nextPageToken.value = instagramFeed.paging?.cursors?.after || null
-    
-  } catch (e) {
-    error.value = 'No se pudieron cargar las imágenes. Por favor, intenta de nuevo más tarde.'
-    console.error('Error loading Instagram posts:', e)
-  } finally {
-    loading.value = false
-  }
-}
-
-// Cargar más posts
-const loadMorePosts = async () => {
-  if (loadingMore.value || !hasMore.value) return
-  
-  try {
-    loadingMore.value = true
-    
-    // Obtener más posts de demostración
-    const morePosts = await fetchMorePostsDemo()
-    if (morePosts.data.length > 0) {
-      instagramPosts.value = [...instagramPosts.value, ...morePosts.data]
-      hasMore.value = !!morePosts.paging?.next
-      nextPageToken.value = morePosts.paging?.cursors?.after || null
-    } else {
-      hasMore.value = false
-    }
-    
-  } catch (e) {
-    error.value = 'Error al cargar más posts'
-  } finally {
-    loadingMore.value = false
-  }
-}
-
-// Funciones para cargar productos desde Instagram
-const fetchProductFeedDemo = async () => {
-  await new Promise(resolve => setTimeout(resolve, 800))
-  
-  // Posts reales de joyeria_tu_estilo_
-  const mockProducts = [
-    {
-      id: 'prod-1',
-      media_type: 'IMAGE',
-      media_url: 'https://scontent-mia3-1.cdninstagram.com/v/t51.29350-15/468462289_18063358789494756_2747911920248602550_n.jpg?stp=dst-jpg_e35_p1080x1080&_nc_ht=scontent-mia3-1.cdninstagram.com&_nc_cat=103&_nc_ohc=_uq1O3qf7DMAX9XZ4bJ&edm=APs17CUBAAAA&ccb=7-5&oh=00_AfAk0UXn41-CgLy2x-mf_oYlp9jQFnPaJg5oQYCXSA_YWA&oe=667A5C76&_nc_sid=10d13b',
-      caption: 'Cuando la elegancia y la calidad se unen, nace la perfección ✨💎 #joyeria #anillos #plata #calidad',
-      permalink: 'https://www.instagram.com/p/C9oKWtgOTvJ/',
-      category: 'Anillos',
-      timestamp: new Date().toISOString()
-    },
-    {
-      id: 'prod-2',
-      media_type: 'IMAGE',
-      media_url: 'https://scontent-mia3-1.cdninstagram.com/v/t51.29350-15/473075592_936376264855538_4257053073772875337_n.jpg?stp=dst-jpg_e35_p1080x1080&_nc_ht=scontent-mia3-1.cdninstagram.com&_nc_cat=106&_nc_ohc=nF-gMtXGQu0AX9ZnA5-&edm=APs17CUBAAAA&ccb=7-5&oh=00_AfAX1wgHH-0ZNsRQVQ-_N67_hb3kx4JYNVxBQX-vN_s_KQ&oe=667B7A4E&_nc_sid=10d13b',
-      caption: 'Eres única, tu joyería también debería serlo ✨ Encuentra las piezas perfectas para complementar tu estilo en nuestra colección 🛍️✨ #joyeria #aretes #pulseras',
-      permalink: 'https://www.instagram.com/p/C9oImOHunCw/',
-      category: 'Aretes',
-      timestamp: new Date().toISOString()
-    },
-    {
-      id: 'prod-3',
-      media_type: 'IMAGE',
-      media_url: 'https://scontent-mia3-1.cdninstagram.com/v/t51.29350-15/472956022_1087826629284458_5518280462409203538_n.jpg?stp=dst-jpg_e35_p1080x1080&_nc_ht=scontent-mia3-1.cdninstagram.com&_nc_cat=101&_nc_ohc=wrbGqKt7hGQAX8gsjqQ&edm=APs17CUBAAAA&ccb=7-5&oh=00_AfCYo_l6rJxu-R3YeT23HN3oo4e63L2c9-G0pOOnnLpOyg&oe=667B09B2&_nc_sid=10d13b',
-      caption: '¡Prepárate para deslumbrar! 💫 Nuestras joyas de fantasía fina están diseñadas para que te sientas hermosa en cada ocasión 💕 #joyeria #collares #aretes',
-      permalink: 'https://www.instagram.com/p/C9oHFdVOejp/',
-      category: 'Collares',
-      timestamp: new Date().toISOString()
-    },
-    {
-      id: 'prod-4',
-      media_type: 'IMAGE',
-      media_url: 'https://scontent-mia3-1.cdninstagram.com/v/t51.29350-15/464483243_382747611172249_8485764904341694089_n.jpg?stp=dst-jpg_e35_p1080x1080&_nc_ht=scontent-mia3-1.cdninstagram.com&_nc_cat=108&_nc_ohc=Asg2XnCkqB0AX9jQcB2&edm=APs17CUBAAAA&ccb=7-5&oh=00_AfAPEQ2S1PCjxz3Fj-8eDzjEXjvDvnOaYjSuL20JYq77gw&oe=667C0B61&_nc_sid=10d13b',
-      caption: 'Nuestras pulseras son el complemento perfecto para tu outfit diario ✨ Encuentra tu estilo con nosotros 💎 #pulseras #joyeria #accesorios',
-      permalink: 'https://www.instagram.com/p/C9oFqMXOjgB/',
-      category: 'Pulseras',
-      timestamp: new Date().toISOString()
-    },
-    {
-      id: 'prod-5',
-      media_type: 'IMAGE',
-      media_url: 'https://scontent-mia3-1.cdninstagram.com/v/t51.29350-15/467673060_853835366601048_3318456409211387233_n.jpg?stp=dst-jpg_e35_p1080x1080&_nc_ht=scontent-mia3-1.cdninstagram.com&_nc_cat=106&_nc_ohc=S4pJd12hD6gAX8gCn-k&edm=APs17CUBAAAA&ccb=7-5&oh=00_AfAf1-uQs8Nm2gFAKElMRhd-SsQ_9ZigSCx_mY4jD6rLig&oe=667CA24A&_nc_sid=10d13b',
-      caption: 'Un toque de elegancia para cada día ✨ Descubre nuestras piezas exclusivas de joyería fina y semi-fina 💕 #joyeria #elegancia #estilo',
-      permalink: 'https://www.instagram.com/p/C9oFPNAO6qO/',
-      category: 'Joyería Fina',
-      timestamp: new Date().toISOString()
-    },
-    {
-      id: 'prod-6',
-      media_type: 'IMAGE',
-      media_url: 'https://scontent-mia3-1.cdninstagram.com/v/t51.29350-15/472873566_1081636586598407_5242147868504834431_n.jpg?stp=dst-jpg_e35_p1080x1080&_nc_ht=scontent-mia3-1.cdninstagram.com&_nc_cat=101&_nc_ohc=Kd_uv_vYAV0AX94Gvmy&edm=APs17CUBAAAA&ccb=7-5&oh=00_AfDgYjcJ2kZI88-EiTWcuVZa_Fp_F7qMkWLqaK9UYWB_JQ&oe=667A5AED&_nc_sid=10d13b',
-      caption: 'Cada joya cuenta una historia, ¿cuál será la tuya? 💫 Visita nuestra tienda y encuentra piezas que hablarán por ti ✨ #joyeria #accesorios #estilo',
-      permalink: 'https://www.instagram.com/p/C9oDyZRuNx7/',
-      category: 'Accesorios',
-      timestamp: new Date().toISOString()
-    }
-  ]
-
-  return {
-    data: mockProducts,
-    paging: {
-      cursors: {
-        after: 'mock_token_1'
-      },
-      next: true
-    }
-  }
-}
-
-// Cargar productos de Instagram
-const loadProductPosts = async () => {
-  try {
-    loadingProducts.value = true
-    errorProducts.value = null
-    
-    // Obtener los posts de productos de nuestra función de demostración
-    const productFeed = await fetchProductFeedDemo()
-    productPosts.value = productFeed.data
-    
-  } catch (e) {
-    errorProducts.value = 'No se pudieron cargar los productos. Por favor, intenta de nuevo más tarde.'
-    console.error('Error loading product posts:', e)
-  } finally {
-    loadingProducts.value = false
-  }
-}
-
-// Generar título del producto a partir del caption
-const getProductTitle = (product) => {
-  // Extraer la primera frase del caption o limitarlo a cierta cantidad de palabras
-  const firstSentence = product.caption.split(/[.!?]/)[0]
-  if (firstSentence.length < 50) {
-    return firstSentence
-  } else {
-    // Si la primera frase es muy larga, limitamos a 5-7 palabras
-    return product.caption.split(' ').slice(0, 6).join(' ') + '...'
-  }
-}
-
-// Extraer categoría del producto
+// Funciones de productos
 const getProductCategory = (product) => {
-  if (product.category) {
-    return product.category
-  }
-  
-  // Intentar extraer categoría de los hashtags
-  const hashtagMatch = product.caption.match(/#(\w+)/g)
-  if (hashtagMatch) {
-    const categories = ['Anillos', 'Aretes', 'Collares', 'Pulseras', 'Joyeria', 'Accesorios']
-    for (const tag of hashtagMatch) {
-      const cleanTag = tag.substring(1) // Remover el #
-      const matchedCategory = categories.find(cat => 
-        cleanTag.toLowerCase() === cat.toLowerCase() || 
-        cleanTag.toLowerCase().includes(cat.toLowerCase())
-      )
-      if (matchedCategory) return matchedCategory
-    }
-    // Si no encontramos una categoría específica, devolvemos el primer hashtag sin el #
-    return hashtagMatch[0].substring(1)
-  }
-  
+  const caption = product.caption?.toLowerCase() || ''
+  if (caption.includes('anillo')) return 'Anillos'
+  if (caption.includes('arete')) return 'Aretes'
+  if (caption.includes('collar')) return 'Collares'
+  if (caption.includes('pulsera')) return 'Pulseras'
   return 'Joyería'
 }
 
-// Generar enlace de WhatsApp para productos
+const getProductTitle = (product) => {
+  const caption = product.caption || ''
+  const firstLine = caption.split('\n')[0]
+  return firstLine.length > 50 ? firstLine.substring(0, 50) + '...' : firstLine
+}
+
 const getWhatsAppLinkForProduct = (product) => {
-  const message = encodeURIComponent(
-    `Hola, estoy interesado en este producto: ${product.permalink}\n¿Está disponible?`
-  )
-  return `https://wa.me/${whatsAppNumber}?text=${message}`
+  const message = `Hola, me interesa este producto: ${product.permalink}`
+  return `https://wa.me/${whatsAppNumber}?text=${encodeURIComponent(message)}`
 }
 
-// Generar enlace de WhatsApp para consultas generales
-const getWhatsAppLink = (post) => {
-  const message = encodeURIComponent(
-    `Hola, me gustaría más información sobre este artículo: ${post.permalink}`
-  )
-  return `https://wa.me/${whatsAppNumber}?text=${message}`
-}
-
-// Generar enlace de WhatsApp para ubicación
-const getDirectionsWhatsAppLink = () => {
-  const message = encodeURIComponent(
-    `Hola, me gustaría saber cómo llegar a su tienda en Moncagua frente a las piscinas El Capulín. ¿Me pueden dar indicaciones?`
-  )
-  return `https://wa.me/${whatsAppNumber}?text=${message}`
-}
-
-// Manejar envío del formulario de contacto
-const handleSubmit = () => {
-  if (!isFormValid.value) {
-    formError.value = 'Por favor, completa todos los campos requeridos correctamente';
-    return;
-  }
-  
-  isSubmitting.value = true;
-  formError.value = null;
-  
-  // Simulamos el envío del formulario con un retraso
-  setTimeout(() => {
-    try {
-      // Aquí iría la lógica para enviar el formulario a un backend real
-      console.log('Formulario enviado:', contactForm.value);
-      
-      // Simulamos un envío exitoso
-      formSuccess.value = true;
-      
-      // Reseteamos el formulario
-      contactForm.value = {
-        name: '',
-        email: '',
-        phone: '',
-        message: '',
-        consent: false
-      };
-    } catch (error) {
-      formError.value = 'Ocurrió un error al enviar tu mensaje. Por favor, intenta nuevamente.';
-      console.error('Error al enviar formulario:', error);
-    } finally {
-      isSubmitting.value = false;
-    }
-  }, 1500);
-}
-
+// Lifecycle hooks
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
-  handleScroll() // Verificar scroll inicial
-  loadInstagramPosts() // Cargar posts de Instagram
-  loadProductPosts() // Cargar posts de productos
+  startAutoplay()
+  window.addEventListener('scroll', () => {
+    isScrolled.value = window.scrollY > 10
+  })
 })
 
 onBeforeUnmount(() => {
-  window.removeEventListener('scroll', handleScroll)
-  document.body.classList.remove('overflow-hidden')
+  stopAutoplay()
+  window.removeEventListener('scroll', () => {
+    isScrolled.value = window.scrollY > 10
+  })
 })
 </script>
 
@@ -1218,22 +862,27 @@ onBeforeUnmount(() => {
   }
 }
 
-/* Animación de carga */
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+/* Animaciones para el slider */
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 0.5s ease;
 }
 
-/* Transiciones del menú */
-.menu-icon-enter-active,
-.menu-icon-leave-active {
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.menu-icon-enter-from,
-.menu-icon-leave-to {
+.slide-fade-enter-from,
+.slide-fade-leave-to {
   opacity: 0;
-  transform: scale(0.95);
+  transform: translateX(30px);
+}
+
+/* Animaciones para los botones de navegación */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.nav-button:hover {
+  animation: pulse 1s infinite;
 }
 
 /* Estilos para el título en el header */
@@ -1268,5 +917,79 @@ onBeforeUnmount(() => {
   .text-title {
     font-size: 1.4rem;
   }
+}
+
+/* Estilos para el slider adaptativo */
+.slider-container {
+  position: relative;
+  width:  100%;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+.slider-wrapper {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+  transition: opacity 0.5s;
+}
+
+.slide img {
+  width: 100%;
+  border-radius: 1rem;
+}
+
+.slide-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  color: white;
+}
+
+.slider-nav {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+}
+
+.nav-button {
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.nav-button:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.nav-dot {
+  height: 8px;
+  width: 8px;
+  margin: 0 4px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.nav-dot.active {
+  transform: scale(1.2);
+  background: white;
 }
 </style>
