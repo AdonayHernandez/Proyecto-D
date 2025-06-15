@@ -45,19 +45,110 @@
                   {{ item.text }}
                 </span>
               </a>
-            </div>
-
-            <!-- Botón menú móvil -->
+            </div>            <!-- Botón menú móvil mejorado con transición -->
             <button 
               @click="toggleMobileMenu" 
-              class="md:hidden relative flex items-center space-x-1 px-3 py-2 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 text-white hover:shadow-md transition-all duration-300"
+              class="md:hidden relative flex items-center space-x-1 px-3 py-2 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 text-white hover:shadow-md transition-all duration-300 hover:scale-105 active:scale-95"
+              aria-expanded="showMobileMenu"
+              aria-controls="mobile-menu"
+              aria-label="Menú principal"
             >
-              <Menu v-if="!showMobileMenu" class="w-5 h-5" />
-              <X v-else class="w-5 h-5" />
-              <span class="text-sm font-medium">Menú</span>
+              <transition 
+                mode="out-in"
+                enter-active-class="transition-all duration-200 ease-out" 
+                leave-active-class="transition-all duration-200 ease-in"
+                enter-from-class="opacity-0 transform rotate-90" 
+                leave-to-class="opacity-0 transform rotate-90"
+              >
+                <Menu v-if="!showMobileMenu" class="w-5 h-5" key="menu-icon"/>
+                <X v-else class="w-5 h-5" key="close-icon"/>
+              </transition>
+              <span class="text-sm font-medium">{{ showMobileMenu ? 'Cerrar' : 'Menú' }}</span>
             </button>
           </div>
         </nav>
+          <!-- Menú móvil con transiciones y animaciones -->
+        <transition
+          enter-active-class="transition ease-out duration-300"
+          enter-from-class="opacity-0 transform -translate-y-10"
+          enter-to-class="opacity-100 transform translate-y-0"
+          leave-active-class="transition ease-in duration-200"
+          leave-from-class="opacity-100 transform translate-y-0"
+          leave-to-class="opacity-0 transform -translate-y-10"
+        >          <div 
+            v-if="showMobileMenu" 
+            class="md:hidden fixed top-[64px] left-0 right-0 bottom-0 bg-white z-50 overflow-y-auto shadow-lg"
+            id="mobile-menu"
+          >
+            <div class="p-4 space-y-2 mobile-menu-content">
+              <!-- Encabezado del menú móvil -->
+              <div class="text-center mb-4 pb-2 border-b border-gray-100">
+                <h3 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500">
+                  Menú de Navegación
+                </h3>
+              </div>
+              
+              <!-- Enlaces de navegación -->
+              <a 
+                v-for="(item, index) in menuItems" 
+                :key="item.id"
+                :href="item.href"
+                @click.prevent="handleMobileNavClick($event, item.id)" 
+                class="flex items-center space-x-3 p-4 rounded-lg transition-all duration-300"
+                :class=" [
+                  activeSection === item.id
+                    ? 'bg-pink-50 text-pink-500'
+                    : 'hover:bg-gray-50 text-gray-700'
+                ]"
+                :style="{animationDelay: `${index * 100}ms`}"
+                :aria-label="`Ir a la sección ${item.text}`"
+              >
+                <div class="flex items-center justify-center w-10 h-10 rounded-full bg-white shadow-sm">
+                  <component 
+                    :is="item.icon"
+                    class="w-5 h-5"
+                    :class=" [
+                      activeSection === item.id
+                        ? 'text-pink-500'
+                        : 'text-gray-500'
+                    ]"
+                  />
+                </div>
+                <span class="text-lg font-medium">{{ item.text }}</span>
+                <ChevronRight class="w-5 h-5 text-gray-400 ml-auto" />
+              </a>
+              
+              <!-- Información de contacto en el menú móvil -->
+              <div class="mt-8 pt-6 border-t border-gray-100">
+                <h3 class="text-lg font-medium text-gray-900 mb-4">Contacto Rápido</h3>
+                <div class="space-y-3">
+                  <a :href="whatsappUrl" target="_blank" rel="noopener noreferrer"
+                     class="flex items-center space-x-3 p-3 rounded-lg bg-green-50 hover:bg-green-100 transition-colors"
+                     aria-label="Enviar mensaje por WhatsApp">
+                    <MessageCircle class="w-5 h-5 text-green-500" />
+                    <span class="text-green-700">Enviar WhatsApp</span>
+                  </a>
+                  <a :href="instagramUrl" target="_blank" rel="noopener noreferrer"
+                     class="flex items-center space-x-3 p-3 rounded-lg bg-pink-50 hover:bg-pink-100 transition-colors"
+                     aria-label="Visitar perfil de Instagram">
+                    <Instagram class="w-5 h-5 text-pink-500" />
+                    <span class="text-pink-700">Visitar Instagram</span>
+                  </a>
+                </div>
+              </div>
+              
+              <!-- Botón para cerrar el menú -->
+              <button 
+                @click="toggleMobileMenu"
+                class="mt-6 w-full p-3 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors flex items-center justify-center"
+                aria-label="Cerrar menú"
+              >
+                <X class="w-5 h-5 text-gray-700 mr-2" />
+                <span>Cerrar menú</span>
+              </button>
+            </div>
+          </div>
+        </transition>
       </header>
 
       <!-- Hero Section con Slider -->
@@ -313,61 +404,11 @@
             
             <!-- Punto de entrega 2 -->
             <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border border-pink-100">
-              <div class="flex items-start">
-                <div class="bg-pink-100 rounded-full p-3 mr-4">
+              <div class="flex items-start">                <div class="bg-pink-100 rounded-full p-3 mr-4">
                   <MapPin class="w-6 h-6 text-pink-500" />
                 </div>
-                <div>
-                  <h3 class="text-xl font-bold mb-2">2. Parque Central de San Miguel</h3>
-                  <p class="text-gray-600 mb-4">Ubicado en el corazón de San Miguel, fácil acceso</p>
-                  <a 
-                    href="https://maps.app.goo.gl/zBq83T7JUmQJPMQS9" 
-                    target="_blank" 
-                    class="text-pink-500 hover:text-pink-700 inline-flex items-center"
-                  >
-                    <span>Ver en mapa</span>
-                    <svg class="w-4 h-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Punto de entrega 3 -->
-            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border border-pink-100">
-              <div class="flex items-start">
-                <div class="bg-pink-100 rounded-full p-3 mr-4">
-                  <MapPin class="w-6 h-6 text-pink-500" />
-                </div>
-                <div>
-                  <h3 class="text-xl font-bold mb-2">3. Plaza El Encuentro, San Miguel</h3>
-                  <p class="text-gray-600 mb-4">Plaza comercial with amplio estacionamiento</p>
-                  <a 
-                    href="https://maps.app.goo.gl/UgxLzehjZ7UbT4LeA" 
-                    target="_blank" 
-                    class="text-pink-500 hover:text-pink-700 inline-flex items-center"
-                  >
-                    <span>Ver en mapa</span>
-                    <svg class="w-4 h-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Punto de entrega 4 -->
-            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border border-pink-100">
-              <div class="flex items-start">
-                <div class="bg-pink-100 rounded-full p-3 mr-4">
-                  <MapPin class="w-6 h-6 text-pink-500" />
-                </div>
-                <div>
-                  <h3 class="text-xl font-bold mb-2">4. Metrocentro San Miguel</h3>
-                  <p class="text-gray-600 mb-4">Centro comercial con facilidad de acceso y seguridad</p>
-                  <a 
-                    href="https://maps.app.goo.gl/GVxY6QzcPZFJZqa46" 
+                <div class="flex-1">
+                  <a href="https://maps.google.com" 
                     target="_blank" 
                     class="text-pink-500 hover:text-pink-700 inline-flex items-center"
                   >
@@ -636,7 +677,7 @@ const instagramProfileUrl = 'https://www.instagram.com/joyeria_tu_estilo_'
 const whatsAppNumber = '+50372011707'
 
 // Emojis de corazones y elementos románticos
-const heartEmojis = ['💖', '💕', '💞', '�', '�', '✨', '�', '🌟', '♥️', '💝']
+const heartEmojis = ['💖', '💕', '💞', '💕', '💟', '✨', '💌', '🌟', '♥️', '💝']
 
 // Items del menú
 const menuItems = [
@@ -716,10 +757,23 @@ const restartAutoplay = () => {
 // Funciones de navegación y utilidades
 const toggleMobileMenu = () => {
   showMobileMenu.value = !showMobileMenu.value
+  
+  // Controla el scroll del body cuando el menú está abierto
   if (showMobileMenu.value) {
     document.body.classList.add('overflow-hidden')
+    // Añadir un evento de escape para cerrar el menú con la tecla ESC
+    document.addEventListener('keydown', handleEscKeypress)
   } else {
     document.body.classList.remove('overflow-hidden')
+    // Remover el evento cuando se cierra el menú
+    document.removeEventListener('keydown', handleEscKeypress)
+  }
+}
+
+// Función para cerrar el menú con la tecla ESC
+const handleEscKeypress = (event) => {
+  if (event.key === 'Escape' && showMobileMenu.value) {
+    toggleMobileMenu()
   }
 }
 
@@ -736,13 +790,21 @@ const scrollToSection = (sectionId) => {
     })
     
     activeSection.value = sectionId
+    return true
   }
+  return false
 }
 
 const handleMobileNavClick = (event, sectionId) => {
   event.preventDefault()
-  scrollToSection(sectionId)
-  toggleMobileMenu()
+  const scrolled = scrollToSection(sectionId)
+  
+  if (scrolled) {
+    // Solo cerramos el menú si pudimos desplazarnos a la sección
+    toggleMobileMenu()
+  } else {
+    console.error(`Sección no encontrada: ${sectionId}`)
+  }
 }
 
 // Funciones de productos
@@ -766,27 +828,79 @@ const getWhatsAppLinkForProduct = (product) => {
   return `https://wa.me/${whatsAppNumber}?text=${encodeURIComponent(message)}`
 }
 
+// Handler para el evento de scroll
+const handleScrollEvent = () => {
+  isScrolled.value = window.scrollY > 10
+  handleScroll()
+  
+  // Actualizar sección activa en el scroll
+  updateActiveSection()
+}
+
+// Función para actualizar qué sección está activa basada en el scroll
+const updateActiveSection = () => {
+  const sections = menuItems.map(item => item.id)
+  
+  for (const sectionId of sections) {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      const rect = element.getBoundingClientRect()
+      const offset = 100 // Ajustar según el tamaño del header
+      
+      if (rect.top <= offset && rect.bottom >= offset) {
+        if (activeSection.value !== sectionId) {
+          activeSection.value = sectionId
+        }
+        break
+      }
+    }
+  }
+}
+
+// Función para manejar el redimensionamiento de la ventana
+const handleWindowResize = () => {
+  // Si la ventana es lo suficientemente grande para mostrar el menú de escritorio,
+  // y el menú móvil está abierto, cerrarlo
+  if (window.innerWidth >= 768 && showMobileMenu.value) { // 768px es el breakpoint md de Tailwind
+    showMobileMenu.value = false
+    document.body.classList.remove('overflow-hidden')
+  }
+}
+
 // Lifecycle hooks
 onMounted(() => {
   startAutoplay()
-  window.addEventListener('scroll', () => {
-    isScrolled.value = window.scrollY > 10
-    handleScroll()
-  })
+  
+  // Añadir evento de scroll para detectar la posición y actualizar la sección activa
+  window.addEventListener('scroll', handleScrollEvent)
   
   // Iniciar animación de joyas al cargar la página
   document.addEventListener('mousemove', handleMouseMove)
+  
+  // Añadir evento de resize para cerrar el menú móvil en vista de escritorio
+  window.addEventListener('resize', handleWindowResize)
+  
+  // Actualizar la sección activa inicialmente
+  setTimeout(updateActiveSection, 300)
+  
+  // Cerrar el menú si se hace click fuera de él
+  document.addEventListener('click', (event) => {
+    if (showMobileMenu.value && event.target.closest('header') && !event.target.closest('button') && !event.target.closest('.mobile-menu-content')) {
+      toggleMobileMenu()
+    }
+  })
 })
 
 onBeforeUnmount(() => {
+  // Limpiar todos los event listeners
   stopAutoplay()
-  window.removeEventListener('scroll', () => {
-    isScrolled.value = window.scrollY > 10
-    handleScroll()
-  })
-  
-  // Detener animación de joyas al desmontar
+  window.removeEventListener('scroll', handleScrollEvent)
+  window.removeEventListener('resize', handleWindowResize)
   document.removeEventListener('mousemove', handleMouseMove)
+  document.removeEventListener('keydown', handleEscKeypress)
+  
+  // Asegurarse de que el body pueda hacer scroll al salir
+  document.body.classList.remove('overflow-hidden')
 })
 
 // Función para animar elementos al hacer scroll - evitando slider y productos
