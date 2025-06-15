@@ -315,13 +315,13 @@
             <p class="text-gray-600 max-w-3xl mx-auto">
               Elige el lugar más conveniente para recibir tus productos
             </p>
-          </div>
-          
-          <!-- Mapa principal de ubicación -->
-          <div class="mb-10 bg-white rounded-xl shadow-lg overflow-hidden">            <h3 class="text-xl font-bold p-4 bg-gradient-to-r from-pink-500 to-purple-500 text-white flex items-center">
+          </div>          <!-- Mapa principal de ubicación -->
+          <div class="mb-10 bg-white rounded-xl shadow-lg overflow-hidden">
+            <h3 class="text-xl font-bold p-4 bg-gradient-to-r from-pink-500 to-purple-500 text-white flex items-center">
               <MapPin class="w-5 h-5 mr-2" />
               Nuestra Ubicación Principal - Frente a Piscinas El Capulín
             </h3>
+            
             <div class="p-4 bg-pink-50">
               <p class="text-gray-700 mb-3">
                 <span class="font-semibold">Moncagua, San Miguel</span> - <span class="text-pink-600">Frente a las piscinas El Capulín</span>
@@ -339,9 +339,20 @@
                 </h4>
                 <p class="text-sm text-gray-600 mb-2">
                   Desde San Miguel, toma la carretera hacia Moncagua. Al llegar al pueblo, sigue por la calle principal hasta identificar "Las piscinas El Capulín".
-                </p>
-                <div class="flex flex-wrap gap-2 mt-3">                  <a 
-                    :href="whatsappUrl"
+                </p>                <div class="flex flex-wrap gap-2 mt-3">
+                  <a 
+                    :href="ubicacionPrincipalMapUrl"
+                    target="_blank"
+                    class="text-sm text-pink-600 hover:text-pink-800 inline-flex items-center bg-pink-50 hover:bg-pink-100 px-3 py-1.5 rounded-full transition-colors"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    Ver en Google Maps
+                  </a>
+                  <a 
+                    href="https://wa.me/+50372011707?text=Hola,%20me%20gustaría%20consultar%20cómo%20llegar%20a%20su%20local"
                     target="_blank"
                     class="text-sm text-green-600 hover:text-green-800 inline-flex items-center bg-green-50 hover:bg-green-100 px-3 py-1.5 rounded-full transition-colors"
                   >
@@ -359,95 +370,291 @@
                   </a>
                 </div>
               </div>
-            </div>            <div class="aspect-[16/9] w-full bg-gray-100 rounded-lg relative overflow-hidden">
-              <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-pink-500 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                <h3 class="text-xl font-medium mb-2">Moncagua, San Miguel</h3>
-                <p class="text-gray-600 mb-4">Frente a las piscinas El Capulín</p>
+            </div>              <!-- Mapa mejorado con Google Maps -->
+            <div class="w-full h-[450px] relative overflow-hidden rounded-b-xl shadow-lg border border-gray-200">
+              <!-- Contenedor del mapa -->
+              <iframe 
+                :src="ubicacionIframeUrl" 
+                class="w-full h-full border-0" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Ubicación de Joyería Tu Estilo, Moncagua, San Miguel"
+              ></iframe>
+              
+              <!-- Panel de controles del mapa -->
+              <div class="absolute top-4 right-4 flex flex-col gap-2">
+                <!-- Botones de zoom -->
+                <button class="w-8 h-8 bg-white rounded-md shadow-md flex items-center justify-center hover:bg-gray-100 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+                  </svg>
+                </button>
+                <button class="w-8 h-8 bg-white rounded-md shadow-md flex items-center justify-center hover:bg-gray-100 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
+                  </svg>
+                </button>
+              </div>
+              
+              <!-- Información y controles inferiores -->
+              <div class="absolute left-0 right-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent pt-16 px-4 pb-4">
+                <div class="flex flex-wrap items-end justify-between gap-2">
+                  <!-- Badge de horario -->
+                  <div class="bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-lg shadow-md">
+                    <p class="text-xs font-medium text-pink-600 flex items-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      Lunes a Sábado, 9:00 AM - 6:00 PM
+                    </p>
+                  </div>
+                  
+                  <!-- Botones de acción -->
+                  <div class="flex gap-2">
+                    <a 
+                      :href="ubicacionPrincipalMapUrl" 
+                      target="_blank"
+                      class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded-lg shadow-md transition-colors flex items-center text-sm"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                      Abrir en Google Maps
+                    </a>
+                    <a 
+                      :href="whatsappUrl + '?text=Hola,%20quisiera%20visitar%20su%20local,%20¿pueden%20darme%20más%20indicaciones?'" 
+                      target="_blank"
+                      class="bg-green-500 hover:bg-green-600 text-white px-3 py-1.5 rounded-lg shadow-md transition-colors flex items-center text-sm"
+                    >
+                      <MessageCircle class="w-4 h-4 mr-1.5" />
+                      Consultar cómo llegar
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Indicador de ubicación personalizado -->
+              <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+                <div class="relative">
+                  <div class="w-6 h-6 rounded-full bg-pink-500 border-2 border-white shadow-lg flex items-center justify-center animate-pulse">
+                    <div class="w-2 h-2 rounded-full bg-white"></div>
+                  </div>
+                  <div class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 translate-y-full">
+                    <div class="bg-white px-3 py-1 rounded shadow-md text-xs font-medium text-pink-600 whitespace-nowrap">
+                      Piscinas El Capulín
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>          <!-- Título de puntos de entrega con estilo moderno -->
+          <div class="mb-10 text-center">
+            <h3 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500 inline-block">
+              Puntos de Entrega Disponibles
+            </h3>
+            <div class="h-1 w-24 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full mx-auto mt-2 mb-8"></div>
+          </div>
+          
+          <!-- Grid de puntos de entrega - ahora con 4 ubicaciones -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 max-w-6xl mx-auto">
+            <!-- 1. Punto de entrega: Parque Central de Moncagua -->
+            <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border border-pink-100 overflow-hidden">
+              <div class="bg-gradient-to-r from-pink-400 to-pink-500 p-2 text-center text-white">
+                <h3 class="text-base font-bold">1. Parque Central de Moncagua</h3>
+              </div>
+              
+              <div class="p-3 flex flex-col items-center">
+                <div class="bg-pink-100 rounded-full w-10 h-10 flex items-center justify-center mb-2">
+                  <MapPin class="w-5 h-5 text-pink-500" />
+                </div>
+                <p class="text-xs text-gray-500 text-center mb-3">Punto de encuentro principal en el centro de la ciudad</p>
+                
                 <a 
-                  href="https://maps.app.goo.gl/hytGZs9mdFftJ4xm8" 
+                  href="https://wa.me/+50372011707?text=Hola,%20quisiera%20coordinar%20una%20entrega%20en%20el%20Parque%20Central%20de%20Moncagua" 
                   target="_blank" 
-                  class="px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition-all"
+                  class="w-full py-2 text-center text-white bg-green-500 hover:bg-green-600 rounded-lg transition-colors text-sm font-medium"
                 >
-                  Ver en Google Maps
+                  Coordinar entrega
+                </a>
+              </div>
+            </div>
+            
+            <!-- 2. Punto de entrega: Parque Central de San Miguel -->
+            <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border border-pink-100 overflow-hidden">
+              <div class="bg-gradient-to-r from-pink-400 to-pink-500 p-2 text-center text-white">
+                <h3 class="text-base font-bold">2. Parque Central de San Miguel</h3>
+              </div>
+              
+              <div class="p-3 flex flex-col items-center">
+                <div class="bg-pink-100 rounded-full w-10 h-10 flex items-center justify-center mb-2">
+                  <MapPin class="w-5 h-5 text-pink-500" />
+                </div>
+                <p class="text-xs text-gray-500 text-center mb-3">Punto céntrico en la ciudad de San Miguel</p>
+                
+                <a 
+                  href="https://wa.me/+50372011707?text=Hola,%20quisiera%20coordinar%20una%20entrega%20en%20el%20Parque%20Central%20de%20San%20Miguel" 
+                  target="_blank" 
+                  class="w-full py-2 text-center text-white bg-green-500 hover:bg-green-600 rounded-lg transition-colors text-sm font-medium"
+                >
+                  Coordinar entrega
+                </a>
+              </div>
+            </div>
+            
+            <!-- 3. Punto de entrega: Plaza El Encuentro -->
+            <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border border-pink-100 overflow-hidden">
+              <div class="bg-gradient-to-r from-pink-400 to-pink-500 p-2 text-center text-white">
+                <h3 class="text-base font-bold">3. Plaza El Encuentro, San Miguel</h3>
+              </div>
+              
+              <div class="p-3 flex flex-col items-center">
+                <div class="bg-pink-100 rounded-full w-10 h-10 flex items-center justify-center mb-2">
+                  <MapPin class="w-5 h-5 text-pink-500" />
+                </div>
+                <p class="text-xs text-gray-500 text-center mb-3">Área comercial con fácil acceso</p>
+                
+                <a 
+                  href="https://wa.me/+50372011707?text=Hola,%20quisiera%20coordinar%20una%20entrega%20en%20Plaza%20El%20Encuentro,%20San%20Miguel" 
+                  target="_blank" 
+                  class="w-full py-2 text-center text-white bg-green-500 hover:bg-green-600 rounded-lg transition-colors text-sm font-medium"
+                >
+                  Coordinar entrega
+                </a>
+              </div>
+            </div>
+            
+            <!-- 4. Punto de entrega: Metrocentro San Miguel -->
+            <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border border-pink-100 overflow-hidden">
+              <div class="bg-gradient-to-r from-pink-400 to-pink-500 p-2 text-center text-white">
+                <h3 class="text-base font-bold">4. Metrocentro San Miguel</h3>
+              </div>
+              
+              <div class="p-3 flex flex-col items-center">
+                <div class="bg-pink-100 rounded-full w-10 h-10 flex items-center justify-center mb-2">
+                  <MapPin class="w-5 h-5 text-pink-500" />
+                </div>
+                <p class="text-xs text-gray-500 text-center mb-3">Centro comercial principal de la zona</p>
+                
+                <a 
+                  href="https://wa.me/+50372011707?text=Hola,%20quisiera%20coordinar%20una%20entrega%20en%20Metrocentro%20San%20Miguel" 
+                  target="_blank" 
+                  class="w-full py-2 text-center text-white bg-green-500 hover:bg-green-600 rounded-lg transition-colors text-sm font-medium"
+                >
+                  Coordinar entrega
                 </a>
               </div>
             </div>
           </div>
-          
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <!-- Punto de entrega 1 -->
-            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border border-pink-100">
-              <div class="flex items-start">
-                <div class="bg-pink-100 rounded-full p-3 mr-4">
-                  <MapPin class="w-6 h-6 text-pink-500" />
+            <!-- Ubicación principal con estilo mejorado -->
+          <div class="mt-12 max-w-4xl mx-auto">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-pink-100">
+              <div class="bg-gradient-to-r from-pink-500 to-purple-500 p-4 text-white relative">
+                <div class="flex items-start">
+                  <div class="bg-white/20 rounded-full p-2 mr-3">
+                    <MapPin class="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 class="text-lg font-bold">Nuestra Ubicación Principal</h3>
+                    <p class="text-sm text-white/90">Frente a las piscinas El Capulín, Moncagua, San Miguel</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 class="text-xl font-bold mb-2">1. Parque Central de Moncagua</h3>
-                  <p class="text-gray-600 mb-4">Punto de encuentro principal en el centro de la ciudad</p>
-                  <a 
-                    href="https://maps.app.goo.gl/hytGZs9mdFftJ4xm8" 
-                    target="_blank" 
-                    class="text-pink-500 hover:text-pink-700 inline-flex items-center"
-                  >
-                    <span>Ver en mapa</span>
-                    <svg class="w-4 h-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                <div class="absolute -bottom-4 right-4">
+                  <div class="bg-pink-100 h-8 w-8 rounded-full flex items-center justify-center shadow-lg animate-bounce">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                     </svg>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="p-6">
+                <div class="flex items-center mb-4 bg-pink-50 p-3 rounded-lg">
+                  <div class="bg-pink-100 rounded-full w-10 h-10 flex items-center justify-center mr-3 flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-gray-800">Horario de atención</h4>
+                    <p class="text-sm text-gray-600">Lunes a Sábado, 9:00 AM - 6:00 PM</p>
+                  </div>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <a 
+                    :href="ubicacionPrincipalMapUrl"
+                    target="_blank" 
+                    class="py-3 text-center text-white bg-blue-500 hover:bg-blue-600 rounded-lg transition-all duration-300 font-medium flex items-center justify-center shadow-md hover:shadow-lg transform hover:-translate-y-1"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    Ver en Google Maps
+                  </a>
+                  
+                  <a 
+                    href="https://wa.me/+50372011707?text=Hola,%20quisiera%20coordinar%20una%20entrega%20en%20su%20local%20frente%20a%20piscinas%20El%20Capulín" 
+                    target="_blank" 
+                    class="py-3 text-center text-white bg-green-500 hover:bg-green-600 rounded-lg transition-all duration-300 font-medium flex items-center justify-center shadow-md hover:shadow-lg transform hover:-translate-y-1"
+                  >
+                    <MessageCircle class="w-5 h-5 mr-2" />
+                    Coordinar entrega
                   </a>
                 </div>
+              </div>
+            </div>
+          </div>          <!-- Información sobre proceso de entrega -->
+          <div class="mt-16 bg-gradient-to-r from-pink-50 to-pink-100/50 p-6 rounded-xl max-w-3xl mx-auto shadow-lg">
+            <div class="text-center mb-6">
+              <h3 class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-600 to-purple-600">
+                ¿Cómo coordinar tu entrega?
+              </h3>
+              <div class="h-1 w-16 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full mx-auto mt-2"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+              <div class="bg-white p-4 rounded-xl shadow-sm text-center">
+                <div class="bg-pink-100 w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span class="text-pink-500 font-bold">1</span>
+                </div>
+                <h4 class="text-sm font-semibold mb-2 text-gray-800">Selecciona tus productos</h4>
+                <p class="text-xs text-gray-600">
+                  Elige los productos que deseas comprar de nuestro catálogo
+                </p>
+              </div>
+              
+              <div class="bg-white p-4 rounded-xl shadow-sm text-center">
+                <div class="bg-pink-100 w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span class="text-pink-500 font-bold">2</span>
+                </div>
+                <h4 class="text-sm font-semibold mb-2 text-gray-800">Coordina por WhatsApp</h4>
+                <p class="text-xs text-gray-600">
+                  Contáctanos para acordar día, hora y punto de entrega
+                </p>
+              </div>
+              
+              <div class="bg-white p-4 rounded-xl shadow-sm text-center">
+                <div class="bg-pink-100 w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span class="text-pink-500 font-bold">3</span>
+                </div>
+                <h4 class="text-sm font-semibold mb-2 text-gray-800">Recibe tu producto</h4>
+                <p class="text-xs text-gray-600">
+                  Nos encontramos en el punto acordado y recibes tu compra
+                </p>
               </div>
             </div>
             
-            <!-- Punto de entrega 2 -->
-            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border border-pink-100">
-              <div class="flex items-start">                <div class="bg-pink-100 rounded-full p-3 mr-4">
-                  <MapPin class="w-6 h-6 text-pink-500" />
-                </div>
-                <div class="flex-1">
-                  <a href="https://maps.google.com" 
-                    target="_blank" 
-                    class="text-pink-500 hover:text-pink-700 inline-flex items-center"
-                  >
-                    <span>Ver en mapa</span>
-                    <svg class="w-4 h-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Información adicional sobre entregas -->
-          <div class="mt-12 text-center bg-pink-50 p-6 rounded-xl max-w-2xl mx-auto">
-            <h3 class="text-xl font-bold mb-2">¿Cómo funcionan las entregas?</h3>
-            <ol class="text-left space-y-3 mt-4">
-              <li class="flex items-start">
-                <span class="flex-shrink-0 bg-pink-200 text-pink-700 rounded-full w-6 h-6 flex items-center justify-center mr-2">1</span>
-                <span>Selecciona tus productos y contáctanos por WhatsApp</span>
-              </li>
-              <li class="flex items-start">
-                <span class="flex-shrink-0 bg-pink-200 text-pink-700 rounded-full w-6 h-6 flex items-center justify-center mr-2">2</span>
-                <span>Coordina día, hora y punto de entrega que prefieras</span>
-              </li>
-              <li class="flex items-start">
-                <span class="flex-shrink-0 bg-pink-200 text-pink-700 rounded-full w-6 h-6 flex items-center justify-center mr-2">3</span>
-                <span>Realiza tu pago y recibe tu producto</span>
-              </li>
-            </ol>
-            <div class="mt-6">
+            <div class="text-center">
               <a 
-                :href="whatsappUrl" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                class="inline-flex items-center px-5 py-3 bg-green-500 hover:bg-green-600 text-white font-medium rounded-full shadow-md transition-colors"
+                href="https://wa.me/+50372011707?text=Hola,%20me%20gustaría%20coordinar%20una%20entrega"
+                target="_blank"
+                class="inline-flex items-center px-6 py-3 rounded-full bg-green-500 text-white hover:bg-green-600 transition-all text-center shadow-md"
               >
                 <MessageCircle class="w-5 h-5 mr-2" />
-                Coordinar entrega
+                <span class="font-medium">Coordinar mi entrega</span>
               </a>
             </div>
           </div>
@@ -526,9 +733,8 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                   <h3 class="text-xl font-medium mb-2">Parque Central de Moncagua</h3>
-                  <p class="text-gray-600 mb-4">Punto de entrega principal</p>
-                  <a 
-                    href="https://maps.app.goo.gl/hytGZs9mdFftJ4xm8" 
+                  <p class="text-gray-600 mb-4">Punto de entrega principal</p>                  <a 
+                    :href="parqueCentralMoncaguaMapUrl" 
                     target="_blank" 
                     class="px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition-all"
                   >
@@ -544,9 +750,8 @@
                 >
                   <MessageCircle class="w-5 h-5 mr-2" />
                   Coordinar entrega
-                </a>
-                <a 
-                  href="https://maps.app.goo.gl/hytGZs9mdFftJ4xm8" 
+                </a>                <a 
+                  :href="ubicacionPrincipalMapUrl" 
                   target="_blank"
                   class="inline-flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg shadow-sm hover:shadow-md transition-colors"
                 >
@@ -559,79 +764,168 @@
             </div>
           </div>
         </div>
-      </section>
-
-      <!-- Footer -->
-      <footer class="bg-white border-t border-gray-100 py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-              <div class="flex items-center mb-4">
-                <div class="w-10 h-10 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full flex items-center justify-center mr-3">
-                  <span class="text-xl">💖</span>
+      </section>      <!-- Footer moderno y elegante -->
+      <footer class="bg-gradient-to-b from-white to-pink-50 pt-16 pb-8 relative overflow-hidden">
+        <!-- Decoración de fondo -->
+        <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-pink-300 via-purple-400 to-pink-300"></div>
+        <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-10">
+          <div class="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-gradient-to-br from-pink-300 to-purple-400 blur-3xl"></div>
+          <div class="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-gradient-to-tr from-pink-400 to-purple-300 blur-3xl"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <!-- Logo y enlaces principales -->
+          <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-12 pb-12 border-b border-pink-100">
+            <div class="flex items-center mb-8 lg:mb-0">
+              <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-500 rounded-full shadow-lg flex items-center justify-center mr-4 p-1">
+                <div class="bg-white rounded-full w-full h-full flex items-center justify-center">
+                  <span class="text-2xl">💖</span>
                 </div>
-                <h2 class="text-xl font-dancing font-bold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
+              </div>
+              <div>
+                <h2 class="text-3xl font-dancing font-bold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent mb-1">
                   Joyería Tu Estilo
                 </h2>
-              </div>
-              <p class="text-gray-600 mb-4">
-                Joyas únicas para momentos especiales. Encuentra la pieza perfecta para ti o para regalar.
-              </p>
-              <div class="flex space-x-4">
-                <a :href="instagramUrl" target="_blank" rel="noopener noreferrer"
-                   class="text-gray-400 hover:text-pink-500 transition-colors">
-                  <Instagram class="w-5 h-5" />
-                </a>
-                <a :href="whatsappUrl" target="_blank" rel="noopener noreferrer"
-                   class="text-gray-400 hover:text-green-500 transition-colors">
-                  <MessageCircle class="w-5 h-5" />
-                </a>
+                <p class="text-gray-500 text-sm">Belleza que perdura en el tiempo</p>
               </div>
             </div>
             
+            <!-- Botones de redes sociales -->
+            <div class="flex space-x-3">
+              <a :href="instagramUrl" target="_blank" rel="noopener noreferrer"
+                 class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300">
+                <Instagram class="w-5 h-5 text-white" />
+              </a>
+              <a :href="whatsappUrl" target="_blank" rel="noopener noreferrer"
+                 class="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-green-400 flex items-center justify-center shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300">
+                <MessageCircle class="w-5 h-5 text-white" />
+              </a>
+            </div>
+          </div>
+          
+          <!-- Secciones del footer -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-16">
+            <!-- Sobre nosotros -->
             <div>
-              <h3 class="text-lg font-medium mb-4">Enlaces Rápidos</h3>
-              <ul class="space-y-2">
+              <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Sobre Nosotros
+              </h3>
+              <p class="text-gray-600 leading-relaxed">
+                Ofrecemos joyas únicas y especiales para cada ocasión. Encuentra la pieza perfecta que refleje tu estilo y personalidad, ideal para ti o para regalar a alguien especial.
+              </p>
+              <div class="mt-4 bg-white p-3 rounded-lg shadow-sm border border-pink-100">
+                <p class="text-sm text-gray-700 italic">
+                  "La belleza está en los detalles, y nuestras joyas son cuidadosamente seleccionadas para realzar tu belleza natural"
+                </p>
+              </div>
+            </div>
+            
+            <!-- Enlaces rápidos con iconos -->
+            <div>
+              <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                </svg>
+                Enlaces Rápidos
+              </h3>
+              <ul class="space-y-3">
                 <li>
                   <a href="#inicio" @click.prevent="scrollToSection('inicio')" 
-                     class="text-gray-500 hover:text-pink-500 transition-colors">Inicio</a>
+                     class="flex items-center text-gray-600 hover:text-pink-500 transition-colors group">
+                    <div class="w-8 h-8 rounded-full bg-pink-100 flex items-center justify-center mr-3 group-hover:bg-pink-200 transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                      </svg>
+                    </div>
+                    Inicio
+                  </a>
                 </li>
                 <li>
                   <a href="#productos" @click.prevent="scrollToSection('productos')" 
-                     class="text-gray-500 hover:text-pink-500 transition-colors">Productos</a>
+                     class="flex items-center text-gray-600 hover:text-pink-500 transition-colors group">
+                    <div class="w-8 h-8 rounded-full bg-pink-100 flex items-center justify-center mr-3 group-hover:bg-pink-200 transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                      </svg>
+                    </div>
+                    Productos
+                  </a>
                 </li>
                 <li>
                   <a href="#ubicacion" @click.prevent="scrollToSection('ubicacion')" 
-                     class="text-gray-500 hover:text-pink-500 transition-colors">Ubicación</a>
+                     class="flex items-center text-gray-600 hover:text-pink-500 transition-colors group">
+                    <div class="w-8 h-8 rounded-full bg-pink-100 flex items-center justify-center mr-3 group-hover:bg-pink-200 transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                    </div>
+                    Ubicación
+                  </a>
                 </li>
                 <li>
                   <a href="#contacto" @click.prevent="scrollToSection('contacto')" 
-                     class="text-gray-500 hover:text-pink-500 transition-colors">Contacto</a>
+                     class="flex items-center text-gray-600 hover:text-pink-500 transition-colors group">
+                    <div class="w-8 h-8 rounded-full bg-pink-100 flex items-center justify-center mr-3 group-hover:bg-pink-200 transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    Contacto
+                  </a>
                 </li>
               </ul>
             </div>
             
+            <!-- Información de contacto -->
             <div>
-              <h3 class="text-lg font-medium mb-4">Contacto</h3>
-              <ul class="space-y-2">
-                <li class="flex items-center space-x-2">
-                  <MessageCircle class="w-5 h-5 text-green-500" />
-                  <a :href="whatsappUrl" target="_blank" rel="noopener noreferrer"
-                     class="text-gray-500 hover:text-green-500 transition-colors">WhatsApp</a>
+              <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+                Contacto
+              </h3>
+              <ul class="space-y-4">
+                <li class="bg-white rounded-lg shadow-sm p-3 border border-pink-100 hover:shadow-md transition-shadow flex items-center">
+                  <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                    <MessageCircle class="w-5 h-5 text-green-600" />
+                  </div>
+                  <div>
+                    <p class="text-xs text-gray-500 mb-1">Escríbenos por WhatsApp</p>
+                    <a :href="whatsappUrl" target="_blank" rel="noopener noreferrer"
+                       class="text-sm font-medium text-green-600 hover:text-green-700 transition-colors">+503 7201-1707</a>
+                  </div>
                 </li>
-                <li class="flex items-center space-x-2">
-                  <Instagram class="w-5 h-5 text-pink-500" />
-                  <a :href="instagramUrl" target="_blank" rel="noopener noreferrer"
-                     class="text-gray-500 hover:text-pink-500 transition-colors">Instagram</a>
+                <li class="bg-white rounded-lg shadow-sm p-3 border border-pink-100 hover:shadow-md transition-shadow flex items-center">
+                  <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center mr-3">
+                    <Instagram class="w-5 h-5 text-pink-600" />
+                  </div>
+                  <div>
+                    <p class="text-xs text-gray-500 mb-1">Síguenos en Instagram</p>
+                    <a :href="instagramProfileUrl" target="_blank" rel="noopener noreferrer"
+                       class="text-sm font-medium text-pink-600 hover:text-pink-700 transition-colors">@joyeria_tu_estilo_</a>
+                  </div>
                 </li>
               </ul>
             </div>
           </div>
           
-          <div class="mt-12 pt-8 border-t border-gray-100 text-center">
-            <p class="text-gray-500 text-sm">
-              © {{ new Date().getFullYear() }} Joyería Tu Estilo. Todos los derechos reservados.
+          <!-- Copyright y derechos reservados -->
+          <div class="mt-12 pt-8 border-t border-pink-100 flex flex-col md:flex-row justify-between items-center">
+            <p class="text-gray-500 text-sm mb-4 md:mb-0 flex items-center">
+              <span class="mr-2">© {{ new Date().getFullYear() }}</span>
+              <span class="text-pink-500 font-dancing text-lg">Joyería Tu Estilo</span>
+              <span class="ml-2">• Todos los derechos reservados.</span>
             </p>
+            <div class="flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-pink-400 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-sm text-gray-500">Hecho con amor en El Salvador</span>
+            </div>
           </div>
         </div>
       </footer>
@@ -675,6 +969,14 @@ const instagramUrl = 'https://www.instagram.com/joyeria_tu_estilo_?utm_source=ig
 const whatsappUrl = 'https://wa.me/+50372011707'
 const instagramProfileUrl = 'https://www.instagram.com/joyeria_tu_estilo_'
 const whatsAppNumber = '+50372011707'
+
+// URLs para Google Maps - Ubicaciones reales
+const ubicacionPrincipalMapUrl = 'https://maps.app.goo.gl/LMYa7VkPFrB7qrB6A' // URL de "Frente a Piscinas El Capulín"
+const parqueCentralMoncaguaMapUrl = 'https://maps.app.goo.gl/m4XvPTPcTNF76f5s7' // URL del Parque Central de Moncagua
+const parqueCentralSanMiguelMapUrl = 'https://maps.app.goo.gl/oS6yQumXy4rGkUp8A' // URL del Parque Central de San Miguel
+const plazaElEncuentroMapUrl = 'https://maps.app.goo.gl/B4SvTx8KFFfv77ST6' // URL de Plaza El Encuentro, San Miguel
+const metrocentroSanMiguelMapUrl = 'https://maps.app.goo.gl/ZES3cGc9rSDj4wH28' // URL de Metrocentro San Miguel
+const ubicacionIframeUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7720.126698999227!2d-88.28469367959394!3d13.4786719!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f7b48351bd0314b%3A0x54eb4d1462ca5a33!2sMoncagua%2C%20El%20Salvador!5e0!3m2!1ses!2ses!4v1718376881776!5m2!1ses!2ses' // URL del iframe de Google Maps
 
 // Emojis de corazones y elementos románticos
 const heartEmojis = ['💖', '💕', '💞', '💕', '💟', '✨', '💌', '🌟', '♥️', '💝']
