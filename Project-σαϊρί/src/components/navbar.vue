@@ -159,9 +159,23 @@
             <h2 class="animate-text text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-pink-400 mb-4 transform hover:scale-105 transition-transform duration-300">
               Encuentra La Joya Perfecta
             </h2>
-            <p class="animate-text text-lg sm:text-xl md:text-2xl mt-6 text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Accesorios exclusivos para complementar tu estilo único
-            </p>
+            
+            <!-- Texto animado con cambios de color -->
+            <div class="animate-text text-lg sm:text-xl md:text-2xl mt-6 text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              <p class="mb-2 changing-text">Joyería, carteras, relojes, cargadores, audífonos y más</p>
+              <p class="animated-text">Todo lo que necesitas para complementar tu estilo único</p>
+              
+              <!-- Palabras rotativas -->
+              <div class="rotating-words mt-4">
+                <span class="word-rotation">
+                  <span>✨ Elegancia</span>
+                  <span>💎 Estilo</span>
+                  <span>💫 Belleza</span>
+                  <span>🌟 Distinción</span>
+                </span>
+              </div>
+            </div>
+            
             <div class="absolute -top-10 left-1/2 transform -translate-x-1/2 w-64 h-64 bg-pink-200 rounded-full filter blur-3xl opacity-20 animate-pulse"></div>
           </div>
 
@@ -1681,5 +1695,66 @@ const handleMouseMove = (event) => {
 .slider-wrapper {
   display: flex;
   transition: transform 0.5s ease-in-out;
+}
+
+/* Animación para cambio de color del texto */
+.changing-text {
+  animation: colorChange 8s infinite;
+  font-weight: 500;
+}
+
+@keyframes colorChange {
+  0% { color: #f472b6; } /* pink-400 */
+  25% { color: #db2777; } /* pink-600 */
+  50% { color: #be185d; } /* pink-700 */
+  75% { color: #9d174d; } /* pink-800 */
+  100% { color: #f472b6; } /* pink-400 */
+}
+
+/* Animación para el texto con movimiento suave */
+.animated-text {
+  animation: floatText 3s ease-in-out infinite;
+  background: linear-gradient(to right, #f472b6, #db2777);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 500;
+}
+
+@keyframes floatText {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* Animación para palabras rotativas */
+.rotating-words {
+  height: 1.5em;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+.word-rotation {
+  display: inline-flex;
+  flex-direction: column;
+  animation: rotate 12s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+}
+
+.word-rotation span {
+  display: block;
+  height: 1.5em;
+  font-weight: 600;
+  background: linear-gradient(to right, #ec4899, #db2777);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding: 0 0.5rem;
+}
+
+@keyframes rotate {
+  0%, 20% { transform: translateY(0); }
+  25%, 45% { transform: translateY(-1.5em); }
+  50%, 70% { transform: translateY(-3em); }
+  75%, 95% { transform: translateY(-4.5em); }
+  100% { transform: translateY(-6em); }
 }
 </style>
