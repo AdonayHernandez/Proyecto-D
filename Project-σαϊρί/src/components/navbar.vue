@@ -1171,20 +1171,19 @@ const menuItems = [
 ]
 
 // Variables y funciones del slider
-const slidesData = [
-  {
-    image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=1920',
-    title: '✨ Colección Primavera 2025',
-    description: 'Descubre nuestras piezas más exclusivas en oro rosa y piedras naturales'
+const slidesData = [  {
+    image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338',
+    title: '✨ Collares Premium Para Ti ✨',
+    description: 'Descubre nuestra colección de collares únicos y elegantes, perfectos para cualquier ocasión'
   },
   {
     image: 'https://images.unsplash.com/photo-1588444837495-c6cfeb53f32d?q=80&w=1920',
-    title: '💎 Aretes Artesanales',
+    title: '😍  Hermosas Gargantillas de corazón plateada y dorada 🙈',
     description: 'Cada pieza cuenta una historia única, diseñada para brillar'
   },
   {
     image: 'https://images.unsplash.com/photo-1601821765780-754fa98637c1?q=80&w=1920',
-    title: '💫 Collares Premium',
+    title: '💫 Collares bonitos y elegantes',
     description: 'Elegancia atemporal en cada detalle'
   },
   {
