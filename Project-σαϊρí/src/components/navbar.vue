@@ -54,57 +54,64 @@
   <!-- Sección de Ubicación -->
 </template>
 
-<script>
-import { ref, onMounted } from 'vue';
+<script setup>
+import { ref, onMounted, watch, nextTick } from 'vue';
 
-export default {
-  name: 'Navbar',
-  
-  setup() {
-    const instagramPosts = ref([
-      {
-        url: 'https://www.instagram.com/p/C3SvzQerlh_/'
+const instagramPosts = ref([
+  {
+    url: 'https://www.instagram.com/p/C3SvzQerlh_/'
 
-      },
-      {
-        url: 'https://www.instagram.com/p/CxL56E8v-Zt/',
+  },
+  {
+    url: 'https://www.instagram.com/p/CxL56E8v-Zt/',
 
-      },
-      {
-        url: 'https://www.instagram.com/p/CxYbVZvLBHS/',
+  },
+  {
+    url: 'https://www.instagram.com/p/CxYbVZvLBHS/',
 
-      },
-      {
-        url: 'https://www.instagram.com/p/CwybZInv4Dr/',
+  },
+  {
+    url: 'https://www.instagram.com/p/CwybZInv4Dr/',
 
-      }
-    ]);
+  },
+  {
+    url: "https://www.instagram.com/p/C9cy2ahJ-D5/",
+  },
+  {
+    url: "https://www.instagram.com/reel/DALxd_UJZjj/",
+  },
+  {
+    url: "https://www.instagram.com/reel/DJKdjA5xD6g/",
+  },
+  {
+    url: "https://www.instagram.com/reel/DLDoZZNxIqL/",
+  },
+  {
+    url: "https://www.instagram.com/reel/DLDpooBxl8B/",
+  }
+]);
 
-    const reloadInstagramEmbeds = () => {
-      if (window.instgrm) {
-        window.instgrm.Embeds.process();
-      }
-    };
-
-    onMounted(() => {
-      // Cargar el script de Instagram cuando el componente se monta
-      const script = document.createElement('script');
-      script.async = true;
-      script.src = '//www.instagram.com/embed.js';
-      document.body.appendChild(script);
-      
-      // Procesar los embeds cuando el script se carga
-      script.onload = () => {
-        reloadInstagramEmbeds();
-      };
-    });
-
-    return {
-      instagramPosts,
-      reloadInstagramEmbeds
-    };
+const loadInstagramEmbed = () => {
+  if (window.instgrm) {
+    window.instgrm.Embeds.process();
+  } else {
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = '//www.instagram.com/embed.js';
+    document.body.appendChild(script);
   }
 };
+
+onMounted(() => {
+  loadInstagramEmbed();
+});
+
+watch(instagramPosts, () => {
+  nextTick(() => {
+    loadInstagramEmbed();
+  });
+});
+
 </script>
 
 <style scoped>

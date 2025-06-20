@@ -261,7 +261,7 @@
           <!-- Botón de Seguir en Instagram -->
           <div class="text-center mt-12">
             <a 
-              href="https://www.instagram.com/joyeria_tu_estilo_/"
+              href="https://www.instagram.com/joyeria_tu_estilo_"
               target="_blank"
               rel="noopener noreferrer"
               class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-500 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
@@ -570,6 +570,165 @@
                     Coordinar entrega
                   </a>
                 </div>
+              </div>
+            </div>
+          </div>          <!-- Información sobre proceso de entrega -->
+          <div class="mt-16 bg-gradient-to-r from-pink-50 to-pink-100/50 p-6 rounded-xl max-w-3xl mx-auto shadow-lg">
+            <div class="text-center mb-6">
+              <h3 class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-600 to-purple-600">
+                ¿Cómo coordinar tu entrega?
+              </h3>
+              <div class="h-1 w-16 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full mx-auto mt-2"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+              <div class="bg-white p-4 rounded-xl shadow-sm text-center">
+                <div class="bg-pink-100 w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span class="text-pink-500 font-bold">1</span>
+                </div>
+                <h4 class="text-sm font-semibold mb-2 text-gray-800">Selecciona tus productos</h4>
+                <p class="text-xs text-gray-600">
+                  Elige los productos que deseas comprar de nuestro catálogo
+                </p>
+              </div>
+              
+              <div class="bg-white p-4 rounded-xl shadow-sm text-center">
+                <div class="bg-pink-100 w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span class="text-pink-500 font-bold">2</span>
+                </div>
+                <h4 class="text-sm font-semibold mb-2 text-gray-800">Coordina por WhatsApp</h4>
+                <p class="text-xs text-gray-600">
+                  Contáctanos para acordar día, hora y punto de entrega
+                </p>
+              </div>
+              
+              <div class="bg-white p-4 rounded-xl shadow-sm text-center">
+                <div class="bg-pink-100 w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span class="text-pink-500 font-bold">3</span>
+                </div>
+                <h4 class="text-sm font-semibold mb-2 text-gray-800">Recibe tu producto</h4>
+                <p class="text-xs text-gray-600">
+                  Nos encontramos en el punto acordado y recibes tu compra
+                </p>
+              </div>
+            </div>
+            
+            <div class="text-center">
+              <a 
+                href="https://wa.me/+50372011707?text=Hola,%20me%20gustaría%20coordinar%20una%20entrega"
+                target="_blank"
+                class="inline-flex items-center px-6 py-3 rounded-full bg-green-500 text-white hover:bg-green-600 transition-all text-center shadow-md"
+              >
+                <MessageCircle class="w-5 h-5 mr-2" />
+                <span class="font-medium">Coordinar mi entrega</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección de Contacto -->
+    
+
+      <!-- Sección de Contacto -->
+      <section id="contacto" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-800">
+                Contáctanos
+              </h2>
+              <p class="text-lg text-gray-600 mb-8">
+                Estamos disponibles para responder tus preguntas y ayudarte a encontrar la joya perfecta para cada ocasión.
+              </p>
+              
+              <div class="space-y-5">
+                <div class="flex items-center bg-white shadow-sm hover:shadow-md rounded-xl p-5 border border-gray-100 transition-all duration-300">
+                  <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                    <MessageCircle class="w-6 h-6 text-green-600" />
+                  </div>
+                  <div>
+                    <h3 class="font-medium text-gray-800">WhatsApp</h3>
+                    <a href="tel:+50372011707" class="text-green-600 hover:text-green-700">+503 7201-1707</a>
+                    <p class="text-sm text-gray-500 mt-1">Atención de lunes a sábado de 9 AM a 7 PM</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-center bg-white shadow-sm hover:shadow-md rounded-xl p-5 border border-gray-100 transition-all duration-300">
+                  <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mr-4">
+                    <Instagram class="w-6 h-6 text-pink-600" />
+                  </div>
+                  <div>
+                    <h3 class="font-medium text-gray-800">Instagram</h3>
+                    <a href="https://www.instagram.com/joyeria_tu_estilo_/" target="_blank" class="text-pink-600 hover:text-pink-700">@joyeria_tu_estilo_</a>
+                    <p class="text-sm text-gray-500 mt-1">Síguenos para ver nuestras últimas creaciones</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-center bg-white shadow-sm hover:shadow-md rounded-xl p-5 border border-gray-100 transition-all duration-300">
+                  <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                    <MapPin class="w-6 h-6 text-blue-600" />
+                  </div>
+                  <div>
+                    <h3 class="font-medium text-gray-800">Ubicaciones</h3>
+                    <p class="text-blue-600">San Miguel & Moncagua, El Salvador</p>
+                    <p class="text-sm text-gray-500 mt-1">Entregas en los puntos indicados</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Mapa del punto de entrega en el parque de Moncagua -->
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-gray-100">
+              <h3 class="text-2xl font-bold mb-6 text-gray-800 flex items-center">
+                <MapPin class="w-6 h-6 mr-2 text-pink-500" />
+                Punto de Entrega Principal
+              </h3>
+              
+              <div class="mb-6 bg-pink-50 p-4 rounded-lg">
+                <h4 class="font-bold text-lg mb-2">Parque Central de Moncagua</h4>
+                <p class="text-gray-600 mb-3">Nuestro punto principal de entrega es el Parque Central de Moncagua, un lugar céntrico y de fácil acceso para todos nuestros clientes.</p>
+                <div class="flex items-center space-x-2 text-pink-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>Horario de entregas: Lunes a Sábado, 8:00 AM - 4:00 PM</span>
+                </div>
+              </div>
+                <div class="rounded-xl overflow-hidden mb-6 border border-gray-200 bg-gray-100 h-[350px] relative">
+                <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-pink-500 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <h3 class="text-xl font-medium mb-2">Parque Central de Moncagua</h3>
+                  <p class="text-gray-600 mb-4">Punto de entrega principal</p>                  <a 
+                    :href="parqueCentralMoncaguaMapUrl" 
+                    target="_blank" 
+                    class="px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition-all"
+                  >
+                    Ver en Google Maps
+                  </a>
+                </div>
+              </div>
+              
+              <div class="flex flex-wrap gap-3 justify-center">                <a 
+                  :href="whatsappUrl"
+                  target="_blank"
+                  class="inline-flex items-center px-4 py-2 bg-green-500 hover:bg-green-600 text-white font-medium rounded-lg shadow-sm hover:shadow-md transition-colors"
+                >
+                  <MessageCircle class="w-5 h-5 mr-2" />
+                  Coordinar entrega
+                </a>                <a 
+                  :href="ubicacionPrincipalMapUrl" 
+                  target="_blank"
+                  class="inline-flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg shadow-sm hover:shadow-md transition-colors"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                  </svg>
+                  Ver en Google Maps
+                </a>
               </div>
             </div>
           </div>          <!-- Información sobre proceso de entrega -->
@@ -1207,6 +1366,18 @@ const updateActiveSection = () => {
 
 // Nueva sección para los posts de Instagram
 const instagramPosts = [
+  {
+    url: 'https://www.instagram.com/reel/DJKdjA5xD6g/'
+  },
+  {
+    url: 'https://www.instagram.com/reel/DLDoZZNxIqL/'
+  },
+  {
+    url: 'https://www.instagram.com/reel/DKfkmPyxVqT/'
+  },
+  {
+    url: 'https://www.instagram.com/p/Cmo_WpQpyOs/'
+  },
   {
     url: 'https://www.instagram.com/p/C3SvzQerlh_/'
   },
