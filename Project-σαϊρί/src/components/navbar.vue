@@ -232,105 +232,13 @@
         </div>
       </section>
       
-      <!-- Sección de Productos con Posts de Instagram -->
-      <section id="productos" class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">Nuestros Productos</h2>
-            <p class="text-gray-600 max-w-3xl mx-auto">
-              Descubre nuestra selección de joyería exclusiva, diseñada para destacar tu belleza y personalidad
-            </p>
-          </div>
-          
-          <!-- Loading State para Productos -->
-          <div v-if="loadingProducts" class="flex justify-center items-center py-12">
-            <RefreshCw class="w-8 h-8 text-pink-500 animate-spin" />
-          </div>
-          
-          <!-- Error State para Productos -->
-          <div v-else-if="errorProducts" class="bg-red-50 text-red-500 p-4 rounded-lg text-center">
-            {{ errorProducts }}
-          </div>
-          
-          <!-- Grid de Productos -->
-          <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div 
-              v-for="product in productPosts" 
-              :key="product.id"
-              class="group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
-            >
-              <!-- Imagen del Producto -->
-              <div class="aspect-square overflow-hidden relative">
-                <img 
-                  :src="product.media_url" 
-                  :alt="product.caption || 'Producto de joyería'"
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                
-                <!-- Etiqueta de categoría -->
-                <div class="absolute top-4 left-4">
-                  <span class="px-3 py-1 bg-white/90 backdrop-blur-sm text-pink-500 text-sm font-medium rounded-full shadow-sm">
-                    {{ getProductCategory(product) }}
-                  </span>
-                </div>
-              </div>
-              
-              <!-- Información del Producto -->
-              <div class="p-5">
-                <h3 class="text-lg font-bold text-gray-900 group-hover:text-pink-500 transition-colors mb-2">
-                  {{ getProductTitle(product) }}
-                </h3>
-                <p class="text-sm text-gray-600 mb-4 line-clamp-3">
-                  {{ product.caption }}
-                </p>
-                
-                <!-- Botones de Acción -->
-                <div class="flex space-x-2">                  <a 
-                    :href="instagramProfileUrl" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    class="flex-1 inline-flex items-center justify-center px-4 py-2 bg-pink-50 hover:bg-pink-100 text-pink-500 font-medium rounded-lg transition-colors text-sm"
-                  >
-                    <Instagram class="w-4 h-4 mr-2" />
-                    Ver en Instagram
-                  </a>
-                  <a 
-                    :href="whatsappUrl" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    class="flex-1 inline-flex items-center justify-center px-4 py-2 bg-green-50 hover:bg-green-100 text-green-500 font-medium rounded-lg transition-colors text-sm"
-                  >
-                    <MessageCircle class="w-4 h-4 mr-2" />
-                    Consultar
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Ver más productos -->
-          <div class="text-center mt-12">
-            <a 
-              :href="instagramProfileUrl" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              class="inline-flex items-center px-6 py-3 bg-white border-2 border-pink-500 text-pink-500 hover:bg-pink-50 font-medium rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
-            >
-              <ShoppingBag class="w-5 h-5 mr-2" />
-              Ver más productos
-            </a>
-          </div>
-        </div>
-      </section>
-
       <!-- Sección de Posts de Instagram -->
       <section class="py-16 bg-gradient-to-br from-pink-50 to-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">Síguenos en Instagram</h2>
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Nuestros Productos</h2>
             <p class="text-gray-600 max-w-3xl mx-auto">
-              Mantente al día con nuestras últimas novedades y productos
+              Mantente al día con nuestras últimas novedades y productos En nuestra cuenta de Instagram.
             </p>
           </div>
 
@@ -359,7 +267,7 @@
               class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-500 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
             >
               <Instagram class="w-5 h-5 mr-2" />
-              Seguir en Instagram
+              Ver mas en Instagram
             </a>
           </div>
         </div>
