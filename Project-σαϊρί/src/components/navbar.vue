@@ -170,8 +170,11 @@
                 <span class="word-rotation">
                   <span>✨ Elegancia</span>
                   <span>💎 Estilo</span>
+                  <span>🌸 Glamour</span>
                   <span>💫 Belleza</span>
                   <span>🌟 Distinción</span>
+                  <span>💖 Originalidad</span>
+
                 </span>
               </div>
             </div>
@@ -321,6 +324,47 @@
         </div>
       </section>
 
+      <!-- Sección de Posts de Instagram -->
+      <section class="py-16 bg-gradient-to-br from-pink-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Síguenos en Instagram</h2>
+            <p class="text-gray-600 max-w-3xl mx-auto">
+              Mantente al día con nuestras últimas novedades y productos
+            </p>
+          </div>
+
+          <!-- Grid de Posts de Instagram -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div v-for="(post, index) in instagramPosts" :key="index" 
+                 class="instagram-post-container bg-white rounded-xl shadow-md overflow-hidden">
+              <blockquote 
+                class="instagram-media" 
+                :data-instgrm-captioned="true"
+                :data-instgrm-permalink="post.url"
+                data-instgrm-version="14"
+                style="background:#FFF; border:0; border-radius:15px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%;"
+              >
+                <div style="padding:16px;"></div>
+              </blockquote>
+            </div>
+          </div>
+
+          <!-- Botón de Seguir en Instagram -->
+          <div class="text-center mt-12">
+            <a 
+              href="https://www.instagram.com/joyeria_tu_estilo_/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-500 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+            >
+              <Instagram class="w-5 h-5 mr-2" />
+              Seguir en Instagram
+            </a>
+          </div>
+        </div>
+      </section>
+
       <!-- Sección de Ubicación -->
       <section id="ubicacion" class="py-16 bg-gradient-to-br from-pink-50 to-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -411,7 +455,7 @@
                 </button>
               </div>
               
-              <!-- Información y controles inferiores -->
+              <!-- Información and controles inferiores -->
               <div class="absolute left-0 right-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent pt-16 px-4 pb-4">
                 <div class="flex flex-wrap items-end justify-between gap-2">
                   <!-- Badge de horario -->
@@ -488,7 +532,7 @@
                 <a 
                   href="https://wa.me/+50372011707?text=Hola,%20quisiera%20coordinar%20una%20entrega%20en%20el%20Parque%20Central%20de%20Moncagua" 
                   target="_blank" 
-                  class="w-full py-2 text-center text-white bg-green-500 hover:bg-green-600 rounded-lg transition-colors text-sm font-medium"
+                  class="w-full py-2 text-center text-white bg-green-500 hover:bg-green-600 rounded-lg transition-colors text-sm"
                 >
                   Coordinar entrega
                 </a>
@@ -510,7 +554,7 @@
                 <a 
                   href="https://wa.me/+50372011707?text=Hola,%20quisiera%20coordinar%20una%20entrega%20en%20el%20Parque%20Central%20de%20San%20Miguel" 
                   target="_blank" 
-                  class="w-full py-2 text-center text-white bg-green-500 hover:bg-green-600 rounded-lg transition-colors text-sm font-medium"
+                  class="w-full py-2 text-center text-white bg-green-500 hover:bg-green-600 rounded-lg transition-colors text-sm"
                 >
                   Coordinar entrega
                 </a>
@@ -532,7 +576,7 @@
                 <a 
                   href="https://wa.me/+50372011707?text=Hola,%20quisiera%20coordinar%20una%20entrega%20en%20Plaza%20El%20Encuentro,%20San%20Miguel" 
                   target="_blank" 
-                  class="w-full py-2 text-center text-white bg-green-500 hover:bg-green-600 rounded-lg transition-colors text-sm font-medium"
+                  class="w-full py-2 text-center text-white bg-green-500 hover:bg-green-600 rounded-lg transition-colors text-sm"
                 >
                   Coordinar entrega
                 </a>
@@ -554,7 +598,7 @@
                 <a 
                   href="https://wa.me/+50372011707?text=Hola,%20quisiera%20coordinar%20una%20entrega%20en%20Metrocentro%20San%20Miguel" 
                   target="_blank" 
-                  class="w-full py-2 text-center text-white bg-green-500 hover:bg-green-600 rounded-lg transition-colors text-sm font-medium"
+                  class="w-full py-2 text-center text-white bg-green-500 hover:bg-green-600 rounded-lg transition-colors text-sm"
                 >
                   Coordinar entrega
                 </a>
@@ -676,6 +720,9 @@
       </section>
 
       <!-- Sección de Contacto -->
+    
+
+      <!-- Sección de Contacto -->
       <section id="contacto" class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -776,9 +823,62 @@
                 </a>
               </div>
             </div>
+          </div>          <!-- Información sobre proceso de entrega -->
+          <div class="mt-16 bg-gradient-to-r from-pink-50 to-pink-100/50 p-6 rounded-xl max-w-3xl mx-auto shadow-lg">
+            <div class="text-center mb-6">
+              <h3 class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-600 to-purple-600">
+                ¿Cómo coordinar tu entrega?
+              </h3>
+              <div class="h-1 w-16 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full mx-auto mt-2"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+              <div class="bg-white p-4 rounded-xl shadow-sm text-center">
+                <div class="bg-pink-100 w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span class="text-pink-500 font-bold">1</span>
+                </div>
+                <h4 class="text-sm font-semibold mb-2 text-gray-800">Selecciona tus productos</h4>
+                <p class="text-xs text-gray-600">
+                  Elige los productos que deseas comprar de nuestro catálogo
+                </p>
+              </div>
+              
+              <div class="bg-white p-4 rounded-xl shadow-sm text-center">
+                <div class="bg-pink-100 w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span class="text-pink-500 font-bold">2</span>
+                </div>
+                <h4 class="text-sm font-semibold mb-2 text-gray-800">Coordina por WhatsApp</h4>
+                <p class="text-xs text-gray-600">
+                  Contáctanos para acordar día, hora y punto de entrega
+                </p>
+              </div>
+              
+              <div class="bg-white p-4 rounded-xl shadow-sm text-center">
+                <div class="bg-pink-100 w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span class="text-pink-500 font-bold">3</span>
+                </div>
+                <h4 class="text-sm font-semibold mb-2 text-gray-800">Recibe tu producto</h4>
+                <p class="text-xs text-gray-600">
+                  Nos encontramos en el punto acordado y recibes tu compra
+                </p>
+              </div>
+            </div>
+            
+            <div class="text-center">
+              <a 
+                href="https://wa.me/+50372011707?text=Hola,%20me%20gustaría%20coordinar%20una%20entrega"
+                target="_blank"
+                class="inline-flex items-center px-6 py-3 rounded-full bg-green-500 text-white hover:bg-green-600 transition-all text-center shadow-md"
+              >
+                <MessageCircle class="w-5 h-5 mr-2" />
+                <span class="font-medium">Coordinar mi entrega</span>
+              </a>
+            </div>
           </div>
         </div>
-      </section>      <!-- Footer moderno y elegante -->
+      </section>
+
+      <!-- Footer moderno y elegante -->
       <footer class="bg-gradient-to-b from-white to-pink-50 pt-16 pb-8 relative overflow-hidden">
         <!-- Decoración de fondo -->
         <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-pink-300 via-purple-400 to-pink-300"></div>
@@ -885,7 +985,7 @@
                      class="flex items-center text-gray-600 hover:text-pink-500 transition-colors group">
                     <div class="w-8 h-8 rounded-full bg-pink-100 flex items-center justify-center mr-3 group-hover:bg-pink-200 transition-colors">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 012 2z" />
                       </svg>
                     </div>
                     Contacto
@@ -948,7 +1048,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, computed } from 'vue'
+import { ref, onMounted, onBeforeUnmount, computed, watch, nextTick } from 'vue'
 import { Home, ShoppingBag, MapPin, Phone, Instagram, MessageCircle, Menu, X, RefreshCw, ChevronLeft, ChevronRight } from 'lucide-vue-next'
 
 // Variables reactivas básicas
@@ -1155,170 +1255,21 @@ const handleScrollEvent = () => {
 
 // Función para actualizar qué sección está activa basada en el scroll
 const updateActiveSection = () => {
-  const sections = menuItems.map(item => item.id)
+  const sections = menuItems.map(item => item.id);
   
-  for (const sectionId of sections) {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      const rect = element.getBoundingClientRect()
-      const offset = 100 // Ajustar según el tamaño del header
-      
-      if (rect.top <= offset && rect.bottom >= offset) {
-        if (activeSection.value !== sectionId) {
-          activeSection.value = sectionId
-        }
-        break
-      }
-    }
-  }
-}
-
-// Función para manejar el redimensionamiento de la ventana
-const handleWindowResize = () => {
-  // Si la ventana es lo suficientemente grande para mostrar el menú de escritorio,
-  // y el menú móvil está abierto, cerrarlo
-  if (window.innerWidth >= 768 && showMobileMenu.value) { // 768px es el breakpoint md de Tailwind
-    showMobileMenu.value = false
-    document.body.classList.remove('overflow-hidden')
-  }
-}
-
-// Lifecycle hooks
-onMounted(() => {
-  startAutoplay()
+  // Añadir punto y coma después de cada declaración
+  const mouseX = event.clientX / window.innerWidth;
+  const mouseY = event.clientY / window.innerHeight;
+  const factor = 1.0;
   
-  // Añadir evento de scroll para detectar la posición y actualizar la sección activa
-  window.addEventListener('scroll', handleScrollEvent)
-  
-  // Iniciar animación de joyas al cargar la página
-  document.addEventListener('mousemove', handleMouseMove)
-  
-  // Añadir evento de resize para cerrar el menú móvil en vista de escritorio
-  window.addEventListener('resize', handleWindowResize)
-  
-  // Actualizar la sección activa inicialmente
-  setTimeout(updateActiveSection, 300)
-  
-  // Cerrar el menú si se hace click fuera de él
-  document.addEventListener('click', (event) => {
-    if (showMobileMenu.value && event.target.closest('header') && !event.target.closest('button') && !event.target.closest('.mobile-menu-content')) {
-      toggleMobileMenu()
-    }
-  })
-})
-
-onBeforeUnmount(() => {
-  // Limpiar todos los event listeners
-  stopAutoplay()
-  window.removeEventListener('scroll', handleScrollEvent)
-  window.removeEventListener('resize', handleWindowResize)
-  document.removeEventListener('mousemove', handleMouseMove)
-  document.removeEventListener('keydown', handleEscKeypress)
-  
-  // Asegurarse de que el body pueda hacer scroll al salir
-  document.body.classList.remove('overflow-hidden')
-})
-
-// Función para animar elementos al hacer scroll - evitando slider y productos
-const handleScroll = () => {
-  const scrollPosition = window.scrollY / document.body.scrollHeight
-  const jewels = document.querySelectorAll('.jewel')
-  const hearts = document.querySelectorAll('.heart')
-  
-  // Detectar si estamos en la sección de slider o productos
-  const isProductSection = scrollPosition > 0.2 && scrollPosition < 0.6
-    // Hacer aparecer joyas según el scroll - evitando slider y productos
-  jewels.forEach((jewel, index) => {
-    // Calcular nueva opacidad basada en la posición de scroll
-    let finalOpacity = 0.25
-    
-    // Si estamos en la sección de productos, reducir opacidad
-    if (isProductSection) {
-      finalOpacity = 0.15
-    }
-    
-    // Mantener joyas más visibles en áreas de footer y header
-    if (scrollPosition < 0.15 || scrollPosition > 0.85) {
-      finalOpacity = 0.3
-    }
-    
-    jewel.style.opacity = finalOpacity.toString()
-    
-    // Ajustar posición basado en scroll - manteniéndose en los bordes
-    const yOffset = index % 2 === 0 ? scrollPosition * 80 : -scrollPosition * 80
-    const currentTransform = jewel.style.transform || ''
-    if (currentTransform.includes('translate')) {
-      jewel.style.transform = currentTransform.replace(/translate\([^)]+\)/, 
-        `translate(${index < 8 ? '-' : ''}${10 + (index % 5) * 5}px, ${yOffset}px)`)
-    }
-  })
-    // Ajustar corazones según scroll - evitando slider y productos
-  hearts.forEach((heart, index) => {
-    // Reducir opacidad en sección de productos
-    let heartOpacity = 0.3
-    if (isProductSection) {
-      heartOpacity = 0.15
-    }
-    
-    // Mantener corazones más visibles en áreas de footer y header
-    if (scrollPosition < 0.15 || scrollPosition > 0.85) {
-      heartOpacity = 0.35
-    }
-    
-    heart.style.opacity = heartOpacity.toString()
-    
-    // Ajustar posición para mantener en los bordes
-    const currentTransform = heart.style.transform || ''
-    if (currentTransform.includes('scale')) {
-      const scale = 0.9 + (scrollPosition * 0.3)
-      heart.style.transform = currentTransform.replace(/scale\([^)]+\)/, `scale(${scale})`)
-    }
-  })
-}
-
-// Función para animar joyas al mover el ratón - manteniéndolas en los bordes
-const handleMouseMove = (event) => {
-  const jewels = document.querySelectorAll('.jewel')
-  const hearts = document.querySelectorAll('.heart')
-  const mouseX = event.clientX / window.innerWidth
-  const mouseY = event.clientY / window.innerHeight
-  
-  // Verifica si el mouse está sobre el slider o sección de productos
-  const isMouseOverContent = () => {
-    // Coordenadas aproximadas del centro de la página (donde están el slider y productos)
-    return mouseX > 0.2 && mouseX < 0.8 && mouseY > 0.3 && mouseY < 0.7
-  }
-  
-  // Animar joyas - manteniéndolas en los bordes
-  jewels.forEach((jewel, index) => {
-    const factor = (index % 5 + 1) * 1.5
-    const scrollPosition = window.scrollY / document.body.scrollHeight
-    
-    // Calcular offset limitado para mantener las joyas en los bordes
-    let offsetX = (mouseX - 0.5) * 20 * factor
-    let offsetY = (mouseY - 0.5) * 20 * factor
-      // Si el mouse está sobre contenido, disminuir la opacidad
-    if (isMouseOverContent()) {
-      jewel.style.opacity = '0.15'
-    } else {
-      jewel.style.opacity = '0.25'
-    }
-    
-    // Movimiento más suave con transición CSS
-    jewel.style.transition = 'transform 0.8s ease-out, opacity 0.5s ease-out'
-    jewel.style.transform = `translate(${offsetX}px, ${offsetY}px) rotate(${index * 10 + scrollPosition * 360}deg) scale(${1 + (mouseY * 0.1)})`
-  })
-  
-  // Animar corazones - manteniéndolos en los bordes
-  hearts.forEach((heart, index) => {
-    const factor = (index % 3 + 1) * 1.2
-    const scrollPosition = window.scrollY / document.body.scrollHeight
-    
+  document.querySelectorAll('.heart').forEach(heart => {
     // Calcular offset limitado para mantener corazones en los bordes
-    let offsetX = (mouseX - 0.5) * 20 * factor
-    let offsetY = (mouseY - 0.5) * 20 * factor    // Si el mouse está sobre contenido, disminuir la opacidad
+    const offsetX = (mouseX - 0.5) * 20 * factor;
+    const offsetY = (mouseY - 0.5) * 20 * factor;
+    
+    // Si el mouse está sobre contenido, disminuir la opacidad
     if (isMouseOverContent()) {
-      heart.style.opacity = '0.15'
+      heart.style.opacity = '0.15';
     } else {
       // Aplicar un efecto de brillo a los emojis cercanos al cursor
       const heartRect = heart.getBoundingClientRect();
@@ -1340,127 +1291,72 @@ const handleMouseMove = (event) => {
     }
     
     // Movimiento más suave para corazones
-    heart.style.transition = 'transform 1s ease-out, opacity 0.5s ease-out'
-    heart.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${1.1 + (mouseX * 0.2)}) rotate(${scrollPosition * 180}deg)`
+    heart.style.transition = 'transform 1s ease-out, opacity 0.5s ease-out';
+    heart.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${1.1 + (mouseX * 0.2)}) rotate(${window.scrollY * 0.1}deg)`;
+  });
+};
+
+
+// Nueva sección para los posts de Instagram
+const instagramPosts = [
+  {
+    url: 'https://www.instagram.com/p/C3SvzQerlh_/'
+  },
+  {
+    url: 'https://www.instagram.com/p/CxL56E8v-Zt/'
+  },
+  {
+    url: 'https://www.instagram.com/p/Cmo_djMp4NV/'
+  },
+  {
+    url: 'https://www.instagram.com/p/Ckja9m1PpMu/'
+  },
+  {
+    url: 'https://www.instagram.com/reel/DExR3BgpaOm/'
+  }
+]
+
+// Aplicar estilos a los posts de Instagram
+const instagramPostStyle = computed(() => ({
+  background: '#FFF',
+  border: '0',
+  borderRadius: '15px',
+  boxShadow: '0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15)',
+  margin: '1px',
+  maxWidth: '540px',
+  minWidth: '326px',
+  padding: '0',
+  width: '99.375%'
+}))
+
+onMounted(() => {
+  // Cargar los posts de Instagram
+  loadInstagramEmbed()
+  
+  // Recargar cuando cambien los posts
+  watch(instagramPosts, () => {
+    nextTick(() => {
+      loadInstagramEmbed()
+    })
   })
+})
+
+const loadInstagramEmbed = () => {
+  if (window.instgrm) {
+    window.instgrm.Embeds.process()
+  } else {
+    const script = document.createElement('script')
+    script.async = true
+    script.src = '//www.instagram.com/embed.js'
+    document.body.appendChild(script)
+    script.onload = () => {
+      window.instgrm.Embeds.process()
+    }
+  }
 }
 </script>
 
-<style scoped>
-/* Fuente personalizada - importar desde Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
-
-.font-dancing {
-  font-family: 'Dancing Script', cursive;
-}
-
-/* Animaciones para menú móvil */
-.mobile-nav-enter-active,
-.mobile-nav-leave-active {
-  transition: opacity 0.3s, transform 0.3s;
-}
-
-.mobile-nav-enter-from,
-.mobile-nav-leave-to {
-  opacity: 0;
-  transform: translateY(-10px);
-}
-
-/* Transiciones específicas para el panel lateral */
-.mobile-nav-enter-active .w-64,
-.mobile-nav-leave-active .w-64 {
-  transition: transform 0.3s ease-out;
-}
-
-.mobile-nav-enter-from .w-64,
-.mobile-nav-leave-to .w-64 {
-  transform: translateX(100%);
-}
-
-/* Media query para móviles */
-@media (max-width: 768px) {
-  .mobile-nav-link {
-    width: 100%;
-  }
-}
-
-/* Efecto de brillo */
-.group:hover .shine {
-  opacity: 1;
-}
-
-/* Animación de texto */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.animate-text {
-  animation: fadeIn 0.8s ease-out forwards;
-  opacity: 0;
-}
-
-.animate-text:nth-child(2) {
-  animation-delay: 0.3s;
-}
-
-.animate-text:nth-child(3) {
-  animation-delay: 0.6s;
-}
-
-/* Limitar líneas de texto */
-.line-clamp-3 {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-/* Animación para el texto del hero */
-.animate-text {
-  animation: fadeInUp 0.8s ease-out forwards;
-  opacity: 0;
-}
-
-.animate-text:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Animaciones para el slider */
-.slide-fade-enter-active,
-.slide-fade-leave-active {
-  transition: all 0.5s ease;
-}
-
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  opacity: 0;
-  transform: translateX(30px);
-}
-
-/* Animaciones para los botones de navegación */
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
-
-.nav-button:hover {
-  animation: pulse 1s infinite;
-}
-
+<style>
 /* Estilos para el título en el header */
 .text-title {
   font-size: 1.8rem;
