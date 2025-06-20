@@ -784,7 +784,7 @@
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span>Horario de entregas: Lunes a Sábado, 9:00 AM - 6:00 PM</span>
+                  <span>Horario de entregas: Lunes a Sábado, 8:00 AM - 4:00 PM</span>
                 </div>
               </div>
                 <div class="rounded-xl overflow-hidden mb-6 border border-gray-200 bg-gray-100 h-[350px] relative">
